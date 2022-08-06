@@ -7,15 +7,74 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E0C475F289D5EFB00962CA6 /* AddMemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0C475E289D5EFB00962CA6 /* AddMemeViewController.swift */; };
 		4E1E85302897FFD2007B01D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1E852F2897FFD2007B01D5 /* AppDelegate.swift */; };
 		4E1E85322897FFD2007B01D5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1E85312897FFD2007B01D5 /* SceneDelegate.swift */; };
 		4E1E85342897FFD2007B01D5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1E85332897FFD2007B01D5 /* ViewController.swift */; };
 		4E1E85372897FFD2007B01D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E1E85352897FFD2007B01D5 /* Main.storyboard */; };
 		4E1E85392897FFD3007B01D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E1E85382897FFD3007B01D5 /* Assets.xcassets */; };
 		4E1E853C2897FFD3007B01D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E1E853A2897FFD3007B01D5 /* LaunchScreen.storyboard */; };
+		4E1E85452898005B007B01D5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4E1E85442898005B007B01D5 /* FirebaseAuth */; };
+		4E1E85472898005B007B01D5 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 4E1E85462898005B007B01D5 /* FirebaseDatabase */; };
+		4E1E85492898005B007B01D5 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4E1E85482898005B007B01D5 /* FirebaseFirestore */; };
+		4E1E854B2898005B007B01D5 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 4E1E854A2898005B007B01D5 /* FirebaseStorage */; };
+		4E1E854E28980097007B01D5 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 4E1E854D28980097007B01D5 /* GoogleSignIn */; };
+		4E1E855328980351007B01D5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4E1E855228980351007B01D5 /* GoogleService-Info.plist */; };
+		4E1E855628980492007B01D5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1E855528980492007B01D5 /* LoginViewController.swift */; };
+		4E1E855828980FF2007B01D5 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1E855728980FF2007B01D5 /* RegisterViewController.swift */; };
+		4E1E855B28981D5A007B01D5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1E855A28981D5A007B01D5 /* HomeViewController.swift */; };
+		4E1E855D28981D65007B01D5 /* MemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1E855C28981D65007B01D5 /* MemesViewController.swift */; };
+		4E1E855F28981D70007B01D5 /* RatesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1E855E28981D70007B01D5 /* RatesViewController.swift */; };
+		4E1E856128981D7D007B01D5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1E856028981D7D007B01D5 /* ProfileViewController.swift */; };
+		4E1E856328981E51007B01D5 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1E856228981E50007B01D5 /* EditProfileViewController.swift */; };
+		4E1E856628981F28007B01D5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1E856528981F28007B01D5 /* User.swift */; };
+		4E24372F289A557100F446C7 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 4E24372E289A557100F446C7 /* SDWebImage */; };
+		4E2E316D289A90D900048465 /* ConfigRegisterPickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2E316C289A90D900048465 /* ConfigRegisterPickers.swift */; };
+		4E2E316F289A980B00048465 /* ConfigEditProfilePickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2E316E289A980B00048465 /* ConfigEditProfilePickers.swift */; };
+		4E33ECEF289D101E003DC7FD /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E33ECEE289D101E003DC7FD /* UserProfileViewController.swift */; };
+		4E33ECF1289D12BC003DC7FD /* ConfigStudentInfo2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E33ECF0289D12BC003DC7FD /* ConfigStudentInfo2.swift */; };
+		4E33ECF3289D2FD2003DC7FD /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E33ECF2289D2FD2003DC7FD /* AddPostViewController.swift */; };
+		4E41CD21289912F300800516 /* ConfigMemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E41CD20289912F200800516 /* ConfigMemes.swift */; };
+		4E41CD242899180100800516 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E41CD232899180100800516 /* Meme.swift */; };
+		4E41CD292899197E00800516 /* MemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E41CD272899197D00800516 /* MemeCell.swift */; };
+		4E41CD2A2899197E00800516 /* MemeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E41CD282899197E00800516 /* MemeCell.xib */; };
+		4E41CD2C2899232C00800516 /* MemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E41CD2B2899232C00800516 /* MemeViewController.swift */; };
+		4E6A2A072898369600041171 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6A2A062898369600041171 /* MainTabBarViewController.swift */; };
+		4E6A2A0A289840CA00041171 /* ConfigStudentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6A2A09289840CA00041171 /* ConfigStudentInfo.swift */; };
+		4E6A2A0F2898412100041171 /* StudentInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6A2A0D2898412100041171 /* StudentInfoCell.swift */; };
+		4E6A2A102898412100041171 /* StudentInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E6A2A0E2898412100041171 /* StudentInfoCell.xib */; };
+		4E6A2A122898446B00041171 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6A2A112898446A00041171 /* Extensions.swift */; };
+		4E6A2A142898479100041171 /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6A2A132898479100041171 /* ChatsViewController.swift */; };
+		4E6A2A162898554A00041171 /* LecturerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6A2A152898554A00041171 /* LecturerInfoViewController.swift */; };
+		4E6A2A18289855CD00041171 /* Lecturer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6A2A17289855CC00041171 /* Lecturer.swift */; };
+		4E6A2A1A2898563400041171 /* ConfigLecturers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6A2A192898563400041171 /* ConfigLecturers.swift */; };
+		4E6A2A29289857A500041171 /* LecturerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6A2A27289857A500041171 /* LecturerCell.swift */; };
+		4E6A2A2A289857A500041171 /* LecturerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E6A2A28289857A500041171 /* LecturerCell.xib */; };
+		4E6A2A2C2898581200041171 /* ConfigReviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6A2A2B2898581200041171 /* ConfigReviews.swift */; };
+		4E6A2A302898586300041171 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6A2A2E2898586300041171 /* ReviewCell.swift */; };
+		4E6A2A312898586300041171 /* ReviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E6A2A2F2898586300041171 /* ReviewCell.xib */; };
+		4E6A2A332898589300041171 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6A2A322898589300041171 /* Review.swift */; };
+		4E6A2A35289858FD00041171 /* CosmosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6A2A34289858FD00041171 /* CosmosView.swift */; };
+		4E7866E7289966F8002882B4 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7866E5289966F8002882B4 /* PostCell.swift */; };
+		4E7866E8289966F8002882B4 /* PostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E7866E6289966F8002882B4 /* PostCell.xib */; };
+		4E7866EA2899726C002882B4 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7866E92899726C002882B4 /* Post.swift */; };
+		4E7866EC2899750A002882B4 /* ConfigPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7866EB2899750A002882B4 /* ConfigPosts.swift */; };
+		4E7866EE2899981C002882B4 /* ConfigPostActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7866ED2899981C002882B4 /* ConfigPostActions.swift */; };
+		4EA01022289BC32000961B68 /* TextPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA01020289BC32000961B68 /* TextPostCell.swift */; };
+		4EA01023289BC32000961B68 /* TextPostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EA01021289BC32000961B68 /* TextPostCell.xib */; };
+		4EA0102A289BC35400961B68 /* PollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA01028289BC35400961B68 /* PollCell.swift */; };
+		4EA0102B289BC35400961B68 /* PollCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EA01029289BC35400961B68 /* PollCell.xib */; };
+		4EA0102E289BC37700961B68 /* ImagePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0102C289BC37700961B68 /* ImagePostCell.swift */; };
+		4EA0102F289BC37700961B68 /* ImagePostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EA0102D289BC37700961B68 /* ImagePostCell.xib */; };
+		4EA01031289C0DA100961B68 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA01030289C0DA100961B68 /* CommentsViewController.swift */; };
+		4EA01035289C14EA00961B68 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA01033289C14EA00961B68 /* CommentCell.swift */; };
+		4EA01036289C14EA00961B68 /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EA01034289C14EA00961B68 /* CommentCell.xib */; };
+		4EA01038289C26EC00961B68 /* ConfigComments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA01037289C26EC00961B68 /* ConfigComments.swift */; };
+		4EA0103A289C272A00961B68 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA01039289C272A00961B68 /* Comment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E0C475E289D5EFB00962CA6 /* AddMemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemeViewController.swift; sourceTree = "<group>"; };
 		4E1E852C2897FFD2007B01D5 /* ExamTBC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExamTBC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E1E852F2897FFD2007B01D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E1E85312897FFD2007B01D5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +83,57 @@
 		4E1E85382897FFD3007B01D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4E1E853B2897FFD3007B01D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4E1E853D2897FFD3007B01D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4E1E855228980351007B01D5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4E1E855528980492007B01D5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		4E1E855728980FF2007B01D5 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		4E1E855A28981D5A007B01D5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		4E1E855C28981D65007B01D5 /* MemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemesViewController.swift; sourceTree = "<group>"; };
+		4E1E855E28981D70007B01D5 /* RatesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesViewController.swift; sourceTree = "<group>"; };
+		4E1E856028981D7D007B01D5 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		4E1E856228981E50007B01D5 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		4E1E856528981F28007B01D5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		4E2E316C289A90D900048465 /* ConfigRegisterPickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigRegisterPickers.swift; sourceTree = "<group>"; };
+		4E2E316E289A980B00048465 /* ConfigEditProfilePickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigEditProfilePickers.swift; sourceTree = "<group>"; };
+		4E33ECEE289D101E003DC7FD /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		4E33ECF0289D12BC003DC7FD /* ConfigStudentInfo2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigStudentInfo2.swift; sourceTree = "<group>"; };
+		4E33ECF2289D2FD2003DC7FD /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
+		4E41CD20289912F200800516 /* ConfigMemes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigMemes.swift; sourceTree = "<group>"; };
+		4E41CD232899180100800516 /* Meme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
+		4E41CD272899197D00800516 /* MemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeCell.swift; sourceTree = "<group>"; };
+		4E41CD282899197E00800516 /* MemeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemeCell.xib; sourceTree = "<group>"; };
+		4E41CD2B2899232C00800516 /* MemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeViewController.swift; sourceTree = "<group>"; };
+		4E6A2A062898369600041171 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
+		4E6A2A09289840CA00041171 /* ConfigStudentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigStudentInfo.swift; sourceTree = "<group>"; };
+		4E6A2A0D2898412100041171 /* StudentInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInfoCell.swift; sourceTree = "<group>"; };
+		4E6A2A0E2898412100041171 /* StudentInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StudentInfoCell.xib; sourceTree = "<group>"; };
+		4E6A2A112898446A00041171 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		4E6A2A132898479100041171 /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
+		4E6A2A152898554A00041171 /* LecturerInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LecturerInfoViewController.swift; sourceTree = "<group>"; };
+		4E6A2A17289855CC00041171 /* Lecturer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Lecturer.swift; path = ../../../TBCMidterm/TBCMidterm/Models/Lecturer.swift; sourceTree = "<group>"; };
+		4E6A2A192898563400041171 /* ConfigLecturers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigLecturers.swift; sourceTree = "<group>"; };
+		4E6A2A27289857A500041171 /* LecturerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LecturerCell.swift; sourceTree = "<group>"; };
+		4E6A2A28289857A500041171 /* LecturerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LecturerCell.xib; sourceTree = "<group>"; };
+		4E6A2A2B2898581200041171 /* ConfigReviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigReviews.swift; sourceTree = "<group>"; };
+		4E6A2A2E2898586300041171 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
+		4E6A2A2F2898586300041171 /* ReviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewCell.xib; sourceTree = "<group>"; };
+		4E6A2A322898589300041171 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		4E6A2A34289858FD00041171 /* CosmosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosView.swift; sourceTree = "<group>"; };
+		4E7866E5289966F8002882B4 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
+		4E7866E6289966F8002882B4 /* PostCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostCell.xib; sourceTree = "<group>"; };
+		4E7866E92899726C002882B4 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		4E7866EB2899750A002882B4 /* ConfigPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigPosts.swift; sourceTree = "<group>"; };
+		4E7866ED2899981C002882B4 /* ConfigPostActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigPostActions.swift; sourceTree = "<group>"; };
+		4EA01020289BC32000961B68 /* TextPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPostCell.swift; sourceTree = "<group>"; };
+		4EA01021289BC32000961B68 /* TextPostCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextPostCell.xib; sourceTree = "<group>"; };
+		4EA01028289BC35400961B68 /* PollCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollCell.swift; sourceTree = "<group>"; };
+		4EA01029289BC35400961B68 /* PollCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PollCell.xib; sourceTree = "<group>"; };
+		4EA0102C289BC37700961B68 /* ImagePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePostCell.swift; sourceTree = "<group>"; };
+		4EA0102D289BC37700961B68 /* ImagePostCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagePostCell.xib; sourceTree = "<group>"; };
+		4EA01030289C0DA100961B68 /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		4EA01033289C14EA00961B68 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		4EA01034289C14EA00961B68 /* CommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
+		4EA01037289C26EC00961B68 /* ConfigComments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigComments.swift; sourceTree = "<group>"; };
+		4EA01039289C272A00961B68 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +141,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E24372F289A557100F446C7 /* SDWebImage in Frameworks */,
+				4E1E854E28980097007B01D5 /* GoogleSignIn in Frameworks */,
+				4E1E85472898005B007B01D5 /* FirebaseDatabase in Frameworks */,
+				4E1E854B2898005B007B01D5 /* FirebaseStorage in Frameworks */,
+				4E1E85452898005B007B01D5 /* FirebaseAuth in Frameworks */,
+				4E1E85492898005B007B01D5 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,13 +174,185 @@
 			children = (
 				4E1E852F2897FFD2007B01D5 /* AppDelegate.swift */,
 				4E1E85312897FFD2007B01D5 /* SceneDelegate.swift */,
-				4E1E85332897FFD2007B01D5 /* ViewController.swift */,
+				4E6A2A0B289840F300041171 /* Views */,
+				4E1E856428981F17007B01D5 /* Models */,
+				4E6A2A08289840A800041171 /* Extensions */,
+				4E1E855428980483007B01D5 /* Controllers */,
 				4E1E85352897FFD2007B01D5 /* Main.storyboard */,
 				4E1E85382897FFD3007B01D5 /* Assets.xcassets */,
 				4E1E853A2897FFD3007B01D5 /* LaunchScreen.storyboard */,
 				4E1E853D2897FFD3007B01D5 /* Info.plist */,
+				4E1E855228980351007B01D5 /* GoogleService-Info.plist */,
 			);
 			path = ExamTBC;
+			sourceTree = "<group>";
+		};
+		4E1E855428980483007B01D5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4E1E855928981D47007B01D5 /* TabBarControllers */,
+				4E1E855528980492007B01D5 /* LoginViewController.swift */,
+				4E1E855728980FF2007B01D5 /* RegisterViewController.swift */,
+				4E1E856228981E50007B01D5 /* EditProfileViewController.swift */,
+				4E6A2A062898369600041171 /* MainTabBarViewController.swift */,
+				4E1E85332897FFD2007B01D5 /* ViewController.swift */,
+				4E6A2A132898479100041171 /* ChatsViewController.swift */,
+				4E6A2A152898554A00041171 /* LecturerInfoViewController.swift */,
+				4E41CD2B2899232C00800516 /* MemeViewController.swift */,
+				4EA01030289C0DA100961B68 /* CommentsViewController.swift */,
+				4E33ECEE289D101E003DC7FD /* UserProfileViewController.swift */,
+				4E33ECF2289D2FD2003DC7FD /* AddPostViewController.swift */,
+				4E0C475E289D5EFB00962CA6 /* AddMemeViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4E1E855928981D47007B01D5 /* TabBarControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4E1E855A28981D5A007B01D5 /* HomeViewController.swift */,
+				4E1E855C28981D65007B01D5 /* MemesViewController.swift */,
+				4E1E855E28981D70007B01D5 /* RatesViewController.swift */,
+				4E1E856028981D7D007B01D5 /* ProfileViewController.swift */,
+			);
+			path = TabBarControllers;
+			sourceTree = "<group>";
+		};
+		4E1E856428981F17007B01D5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4E6A2A17289855CC00041171 /* Lecturer.swift */,
+				4E1E856528981F28007B01D5 /* User.swift */,
+				4E6A2A322898589300041171 /* Review.swift */,
+				4E41CD232899180100800516 /* Meme.swift */,
+				4E7866E92899726C002882B4 /* Post.swift */,
+				4EA01039289C272A00961B68 /* Comment.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4E41CD22289916CC00800516 /* MemeCell */ = {
+			isa = PBXGroup;
+			children = (
+				4E41CD272899197D00800516 /* MemeCell.swift */,
+				4E41CD282899197E00800516 /* MemeCell.xib */,
+			);
+			path = MemeCell;
+			sourceTree = "<group>";
+		};
+		4E6A2A08289840A800041171 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4E6A2A112898446A00041171 /* Extensions.swift */,
+				4E6A2A09289840CA00041171 /* ConfigStudentInfo.swift */,
+				4E6A2A192898563400041171 /* ConfigLecturers.swift */,
+				4E6A2A2B2898581200041171 /* ConfigReviews.swift */,
+				4E41CD20289912F200800516 /* ConfigMemes.swift */,
+				4E7866EB2899750A002882B4 /* ConfigPosts.swift */,
+				4E7866ED2899981C002882B4 /* ConfigPostActions.swift */,
+				4E2E316C289A90D900048465 /* ConfigRegisterPickers.swift */,
+				4E2E316E289A980B00048465 /* ConfigEditProfilePickers.swift */,
+				4EA01037289C26EC00961B68 /* ConfigComments.swift */,
+				4E33ECF0289D12BC003DC7FD /* ConfigStudentInfo2.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4E6A2A0B289840F300041171 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4EA01032289C14CD00961B68 /* PostCell */,
+				4EA0101E289BC2B200961B68 /* Posts */,
+				4E41CD22289916CC00800516 /* MemeCell */,
+				4E6A2A2D2898585400041171 /* ReviewCell */,
+				4E6A2A262898579000041171 /* LecturerCell */,
+				4E6A2A0C2898410200041171 /* StudentInfoCell */,
+				4E6A2A34289858FD00041171 /* CosmosView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4E6A2A0C2898410200041171 /* StudentInfoCell */ = {
+			isa = PBXGroup;
+			children = (
+				4E6A2A0D2898412100041171 /* StudentInfoCell.swift */,
+				4E6A2A0E2898412100041171 /* StudentInfoCell.xib */,
+			);
+			path = StudentInfoCell;
+			sourceTree = "<group>";
+		};
+		4E6A2A262898579000041171 /* LecturerCell */ = {
+			isa = PBXGroup;
+			children = (
+				4E6A2A27289857A500041171 /* LecturerCell.swift */,
+				4E6A2A28289857A500041171 /* LecturerCell.xib */,
+			);
+			path = LecturerCell;
+			sourceTree = "<group>";
+		};
+		4E6A2A2D2898585400041171 /* ReviewCell */ = {
+			isa = PBXGroup;
+			children = (
+				4E6A2A2E2898586300041171 /* ReviewCell.swift */,
+				4E6A2A2F2898586300041171 /* ReviewCell.xib */,
+			);
+			path = ReviewCell;
+			sourceTree = "<group>";
+		};
+		4E7866E4289966E2002882B4 /* PostCell */ = {
+			isa = PBXGroup;
+			children = (
+				4E7866E5289966F8002882B4 /* PostCell.swift */,
+				4E7866E6289966F8002882B4 /* PostCell.xib */,
+			);
+			path = PostCell;
+			sourceTree = "<group>";
+		};
+		4EA0101E289BC2B200961B68 /* Posts */ = {
+			isa = PBXGroup;
+			children = (
+				4EA01027289BC34300961B68 /* PollCell */,
+				4EA01024289BC32800961B68 /* ImagePostCell */,
+				4EA0101F289BC30900961B68 /* TextPostCell */,
+				4E7866E4289966E2002882B4 /* PostCell */,
+			);
+			path = Posts;
+			sourceTree = "<group>";
+		};
+		4EA0101F289BC30900961B68 /* TextPostCell */ = {
+			isa = PBXGroup;
+			children = (
+				4EA01020289BC32000961B68 /* TextPostCell.swift */,
+				4EA01021289BC32000961B68 /* TextPostCell.xib */,
+			);
+			path = TextPostCell;
+			sourceTree = "<group>";
+		};
+		4EA01024289BC32800961B68 /* ImagePostCell */ = {
+			isa = PBXGroup;
+			children = (
+				4EA0102C289BC37700961B68 /* ImagePostCell.swift */,
+				4EA0102D289BC37700961B68 /* ImagePostCell.xib */,
+			);
+			path = ImagePostCell;
+			sourceTree = "<group>";
+		};
+		4EA01027289BC34300961B68 /* PollCell */ = {
+			isa = PBXGroup;
+			children = (
+				4EA01028289BC35400961B68 /* PollCell.swift */,
+				4EA01029289BC35400961B68 /* PollCell.xib */,
+			);
+			path = PollCell;
+			sourceTree = "<group>";
+		};
+		4EA01032289C14CD00961B68 /* PostCell */ = {
+			isa = PBXGroup;
+			children = (
+				4EA01033289C14EA00961B68 /* CommentCell.swift */,
+				4EA01034289C14EA00961B68 /* CommentCell.xib */,
+			);
+			path = PostCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +371,14 @@
 			dependencies = (
 			);
 			name = ExamTBC;
+			packageProductDependencies = (
+				4E1E85442898005B007B01D5 /* FirebaseAuth */,
+				4E1E85462898005B007B01D5 /* FirebaseDatabase */,
+				4E1E85482898005B007B01D5 /* FirebaseFirestore */,
+				4E1E854A2898005B007B01D5 /* FirebaseStorage */,
+				4E1E854D28980097007B01D5 /* GoogleSignIn */,
+				4E24372E289A557100F446C7 /* SDWebImage */,
+			);
 			productName = ExamTBC;
 			productReference = 4E1E852C2897FFD2007B01D5 /* ExamTBC.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +407,11 @@
 				Base,
 			);
 			mainGroup = 4E1E85232897FFD2007B01D5;
+			packageReferences = (
+				4E1E85432898005B007B01D5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				4E1E854C28980097007B01D5 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				4E24372D289A557100F446C7 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = 4E1E852D2897FFD2007B01D5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -126,8 +427,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E1E853C2897FFD3007B01D5 /* LaunchScreen.storyboard in Resources */,
+				4E41CD2A2899197E00800516 /* MemeCell.xib in Resources */,
+				4E1E855328980351007B01D5 /* GoogleService-Info.plist in Resources */,
+				4EA0102F289BC37700961B68 /* ImagePostCell.xib in Resources */,
+				4E6A2A312898586300041171 /* ReviewCell.xib in Resources */,
+				4EA01023289BC32000961B68 /* TextPostCell.xib in Resources */,
+				4E7866E8289966F8002882B4 /* PostCell.xib in Resources */,
 				4E1E85392897FFD3007B01D5 /* Assets.xcassets in Resources */,
+				4E6A2A2A289857A500041171 /* LecturerCell.xib in Resources */,
 				4E1E85372897FFD2007B01D5 /* Main.storyboard in Resources */,
+				4EA0102B289BC35400961B68 /* PollCell.xib in Resources */,
+				4EA01036289C14EA00961B68 /* CommentCell.xib in Resources */,
+				4E6A2A102898412100041171 /* StudentInfoCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,9 +449,51 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E7866EC2899750A002882B4 /* ConfigPosts.swift in Sources */,
+				4E6A2A0A289840CA00041171 /* ConfigStudentInfo.swift in Sources */,
+				4E6A2A2C2898581200041171 /* ConfigReviews.swift in Sources */,
+				4EA0102A289BC35400961B68 /* PollCell.swift in Sources */,
+				4E7866E7289966F8002882B4 /* PostCell.swift in Sources */,
+				4E1E855628980492007B01D5 /* LoginViewController.swift in Sources */,
+				4E33ECF1289D12BC003DC7FD /* ConfigStudentInfo2.swift in Sources */,
+				4E1E855828980FF2007B01D5 /* RegisterViewController.swift in Sources */,
+				4E6A2A1A2898563400041171 /* ConfigLecturers.swift in Sources */,
+				4EA0103A289C272A00961B68 /* Comment.swift in Sources */,
+				4E1E855F28981D70007B01D5 /* RatesViewController.swift in Sources */,
 				4E1E85342897FFD2007B01D5 /* ViewController.swift in Sources */,
+				4E6A2A332898589300041171 /* Review.swift in Sources */,
+				4E7866EA2899726C002882B4 /* Post.swift in Sources */,
 				4E1E85302897FFD2007B01D5 /* AppDelegate.swift in Sources */,
+				4E2E316D289A90D900048465 /* ConfigRegisterPickers.swift in Sources */,
+				4E2E316F289A980B00048465 /* ConfigEditProfilePickers.swift in Sources */,
+				4EA01022289BC32000961B68 /* TextPostCell.swift in Sources */,
+				4E41CD292899197E00800516 /* MemeCell.swift in Sources */,
+				4E41CD2C2899232C00800516 /* MemeViewController.swift in Sources */,
+				4E33ECF3289D2FD2003DC7FD /* AddPostViewController.swift in Sources */,
+				4E41CD242899180100800516 /* Meme.swift in Sources */,
+				4E6A2A142898479100041171 /* ChatsViewController.swift in Sources */,
+				4E6A2A35289858FD00041171 /* CosmosView.swift in Sources */,
+				4E1E855D28981D65007B01D5 /* MemesViewController.swift in Sources */,
+				4E6A2A0F2898412100041171 /* StudentInfoCell.swift in Sources */,
+				4E1E856128981D7D007B01D5 /* ProfileViewController.swift in Sources */,
+				4EA0102E289BC37700961B68 /* ImagePostCell.swift in Sources */,
 				4E1E85322897FFD2007B01D5 /* SceneDelegate.swift in Sources */,
+				4EA01035289C14EA00961B68 /* CommentCell.swift in Sources */,
+				4EA01038289C26EC00961B68 /* ConfigComments.swift in Sources */,
+				4EA01031289C0DA100961B68 /* CommentsViewController.swift in Sources */,
+				4E6A2A122898446B00041171 /* Extensions.swift in Sources */,
+				4E41CD21289912F300800516 /* ConfigMemes.swift in Sources */,
+				4E1E856328981E51007B01D5 /* EditProfileViewController.swift in Sources */,
+				4E6A2A072898369600041171 /* MainTabBarViewController.swift in Sources */,
+				4E6A2A29289857A500041171 /* LecturerCell.swift in Sources */,
+				4E1E855B28981D5A007B01D5 /* HomeViewController.swift in Sources */,
+				4E1E856628981F28007B01D5 /* User.swift in Sources */,
+				4E33ECEF289D101E003DC7FD /* UserProfileViewController.swift in Sources */,
+				4E6A2A162898554A00041171 /* LecturerInfoViewController.swift in Sources */,
+				4E6A2A18289855CD00041171 /* Lecturer.swift in Sources */,
+				4E0C475F289D5EFB00962CA6 /* AddMemeViewController.swift in Sources */,
+				4E6A2A302898586300041171 /* ReviewCell.swift in Sources */,
+				4E7866EE2899981C002882B4 /* ConfigPostActions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +711,66 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4E1E85432898005B007B01D5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+		4E1E854C28980097007B01D5 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		4E24372D289A557100F446C7 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4E1E85442898005B007B01D5 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E1E85432898005B007B01D5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		4E1E85462898005B007B01D5 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E1E85432898005B007B01D5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		4E1E85482898005B007B01D5 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E1E85432898005B007B01D5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		4E1E854A2898005B007B01D5 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E1E85432898005B007B01D5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		4E1E854D28980097007B01D5 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E1E854C28980097007B01D5 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		4E24372E289A557100F446C7 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E24372D289A557100F446C7 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4E1E85242897FFD2007B01D5 /* Project object */;
 }

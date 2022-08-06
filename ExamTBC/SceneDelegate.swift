@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import FirebaseAuth
+import GoogleSignIn
+import FirebaseDatabase
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -17,6 +20,69 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        // Get initial view controller
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if Auth.auth().currentUser != nil {
+            
+            let dbUsers = Database.database().reference().child("users")
+            
+//            If user reference contains current user id go to main page
+            
+            dbUsers.child(Auth.auth().currentUser!.uid).observeSingleEvent(of: .value) { snapshot in
+                print(snapshot.exists())
+                if snapshot.exists() {
+                    // Go To Main Page
+                    let vc = storyboard.instantiateViewController(withIdentifier: "MainNavigationController")
+                    self.window?.rootViewController = vc
+                    self.window?.makeKeyAndVisible()
+                } else {
+                    let vc = storyboard.instantiateViewController(withIdentifier: "RegisterViewController")
+                    self.window?.rootViewController = vc
+                    self.window?.makeKeyAndVisible()
+                }
+            }
+            
+        } else {
+            let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+            self.window?.rootViewController = vc
+            self.window?.makeKeyAndVisible()
+        }
+        
+        //
+        
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//
+//        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+//            if error != nil || user == nil {
+//                // Show the app's signed-out state.
+//                let vc = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+//                self.window?.rootViewController = vc
+//                self.window?.makeKeyAndVisible()
+//            } else {
+//                // Show the app's signed-in state.
+//                let dbUsers = Database.database().reference().child("users")
+//
+//    //            If user reference contains current user id go to main page
+//
+//                dbUsers.child(Auth.auth().currentUser!.uid).observeSingleEvent(of: .value) { snapshot in
+//                    print(snapshot.exists())
+//                    if snapshot.exists() {
+//                        // Go To Main Page
+//                        let vc = storyboard.instantiateViewController(withIdentifier: "MainNavigationController")
+//                        self.window?.rootViewController = vc
+//                        self.window?.makeKeyAndVisible()
+//                    } else {
+//                        let vc = storyboard.instantiateViewController(withIdentifier: "RegisterViewController")
+//                        self.window?.rootViewController = vc
+//                        self.window?.makeKeyAndVisible()
+//                    }
+//                }
+//            }
+//        }
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
