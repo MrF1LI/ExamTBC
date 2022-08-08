@@ -62,7 +62,7 @@ class ProfileViewController: UIViewController {
     func configureUserProfile() {
         imageViewProfile.contentMode = .scaleAspectFill
         imageViewProfile.layer.cornerRadius = imageViewProfile.frame.width / 2
-        loadUserInfo1()
+        loadUserInfo()
     }
     
     func configureNotificationCenter() {
@@ -101,7 +101,10 @@ class ProfileViewController: UIViewController {
     
     // MARK: Functions
     
-    func loadUserInfo1() {
+    func loadUserInfo() {
+        
+        tableViewStudentInfo.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
+        
         dbUsers.child(currentUser.uid).observe(.value) { snapshot in
             self.arrayOfStudentInfo.removeAll()
             
@@ -130,58 +133,9 @@ class ProfileViewController: UIViewController {
                                               options: .continueInBackground,
                                               completed: nil)
         }
-    }
-    
-    func loadUserInfo() {
-        
-        dbUsers.child(currentUser.uid).observe(.value) { snapshot in
-            
-            self.arrayOfStudentInfo.removeAll()
-                        
-            let value = snapshot.value as? NSDictionary
-            let user = User(id: value?["id"] as? String ?? "",
-                            name: value?["name"] as? String ?? "",
-                            surname: value?["surname"] as? String ?? "",
-                            age: value?["age"] as? Int ?? 0,
-                            email: value?["email"] as? String ?? "")
-            
-            // load user info
-            
-            let faculty = value?["faculty"] as? String ?? ""
-            let course = value?["course"] as? String ?? ""
-            let minor = value?["minor"] as? String ?? ""
-            
-            self.labelFullName.text = "\(user.name) \(user.surname)"
-            self.labelEmail.text = "\(user.email)"
-            
-            var userInfo = [
-                UserInfo(name: "\(user.age)", image: .age),
-                UserInfo(name: course, image: .course),
-                UserInfo(name: faculty, image: .faculty)
-            ]
-            
-            if !minor.isEmpty {
-                userInfo.append(UserInfo(name: "Minor: \(minor)", image: .minor))
-            }
-                        
-            self.arrayOfStudentInfo.append(contentsOf: userInfo)
-            self.tableViewStudentInfo.reloadData()
-            
-            // Load Profile Picture
-            
-            let url = value?["profile"] as? String ?? ""
-            
-            self.imageViewProfile.sd_setImage(with: URL(string: url),
-                                              placeholderImage: UIImage(named: "user"),
-                                              options: .continueInBackground,
-                                              completed: nil)
-            
-            //
-            
-        }
         
     }
-    
+        
     // MARK: Navigation Functions
     
     func goToEditProfile() {

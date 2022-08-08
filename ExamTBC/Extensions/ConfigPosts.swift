@@ -50,18 +50,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             cell.configure(with: currentPost as! ImagePost)
             return cell
             
-        } else if currentPost is Poll {
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "PollCell", for: indexPath) as? PollCell
-            guard let cell = cell else { return UITableViewCell() }
-            
-            cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: UIScreen.main.bounds.width)
-            cell.selectionStyle = .none
-            cell.delegate = self
-            
-            cell.configure(with: currentPost as! Poll)
-            return cell
-            
         } else {
             return UITableViewCell()
         }

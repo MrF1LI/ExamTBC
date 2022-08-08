@@ -20,14 +20,63 @@ extension HomeViewController: PostCellDelegate {
             let reactRef = dbPosts.child(post.id).child("reacts")
             
             reactRef.child(currentUser.uid).observeSingleEvent(of: .value) { snapshot in
+                
                 if snapshot.exists() {
-//                    reactRef.updateChildValues([self.currentUser.uid: nil])
+                
+                    if let tCell = cell as? TextPostCell {
+                        tCell.imageViewHeart.image = UIImage(systemName: "heart")
+                        tCell.imageViewHeart.tintColor = .black
+                    } else if let iCell = cell as? ImagePostCell {
+                        iCell.imageViewHeart.image = UIImage(systemName: "heart")
+                        iCell.imageViewHeart.tintColor = .black
+                    }
+                    
                     snapshot.ref.removeValue()
+                    
                 } else {
+                    
+                    if let iCell = cell as? ImagePostCell {
+                        
+                        iCell.imageViewHeart.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+                        
+                        UIView.animate(
+                            withDuration: 1.2,
+                            delay: 0.0,
+                            usingSpringWithDamping: 0.2,
+                            initialSpringVelocity: 0.2,
+                            options: .curveEaseOut,
+                            animations: {
+                                iCell.imageViewHeart.transform = CGAffineTransform(scaleX: 1, y: 1)
+                                iCell.imageViewHeart.image = UIImage(systemName: "heart.fill")
+                                iCell.imageViewHeart.tintColor = .systemPink
+                            },
+                            completion: nil)
+                        
+                    } else if let tCell = cell as? TextPostCell {
+                        
+                        tCell.imageViewHeart.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+                        
+                        UIView.animate(
+                            withDuration: 1.2,
+                            delay: 0.0,
+                            usingSpringWithDamping: 0.2,
+                            initialSpringVelocity: 0.2,
+                            options: .curveEaseOut,
+                            animations: {
+                                tCell.imageViewHeart.transform = CGAffineTransform(scaleX: 1, y: 1)
+                                tCell.imageViewHeart.image = UIImage(systemName: "heart.fill")
+                                tCell.imageViewHeart.tintColor = .systemPink
+                            },
+                            completion: nil)
+                        
+                    }
+                    
                     let date = String(DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .none))
                     reactRef.updateChildValues([self.currentUser.uid: date])
+                    
                 }
-                self.tableViewPosts.reloadRows(at: [indexPath], with: .none)
+                
+//                self.tableViewPosts.reloadRows(at: [indexPath], with: .none)
             }
             
         }

@@ -93,31 +93,16 @@ class ImagePostCell: UITableViewCell {
                                               completed: nil)
         }
         
-        let ref = dbPosts.child(post.id).child("reacts").child(Auth.auth().currentUser!.uid)
-        ref.observe(.value) { snapshot in
+        let ref = dbPosts.child(post.id).child("reacts")
+        ref.observeSingleEvent(of: .value) { snapshot in
             
-            if snapshot.exists() {
-                
-                self.imageViewHeart.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-                
-                UIView.animate(
-                    withDuration: 1.2,
-                    delay: 0.0,
-                    usingSpringWithDamping: 0.2,
-                    initialSpringVelocity: 0.2,
-                    options: .curveEaseOut,
-                    animations: {
-                        self.imageViewHeart.transform = CGAffineTransform(scaleX: 1, y: 1)
-                        self.imageViewHeart.image = UIImage(systemName: "heart.fill")
-                        self.imageViewHeart.tintColor = .systemPink
-                    },
-                    completion: nil)
-                
+            if snapshot.hasChild(Auth.auth().currentUser!.uid) {
+                self.imageViewHeart.image = UIImage(systemName: "heart.fill")
+                self.imageViewHeart.tintColor = .systemPink
             } else {
-                
                 self.imageViewHeart.image = UIImage(systemName: "heart")
                 self.imageViewHeart.tintColor = .black
-                
+
             }
             
         }
@@ -139,8 +124,11 @@ class ImagePostCell: UITableViewCell {
         imageViewSave.addGestureRecognizer(saveGesture)
         
         let goToAuthorProfileGesture = UITapGestureRecognizer(target: self, action: #selector(actionGoToAuthorProfile))
-        labelAuthorFullName.addGestureRecognizer(goToAuthorProfileGesture)
         imageViewAuthorProfile.addGestureRecognizer(goToAuthorProfileGesture)
+        
+        let goToAuthorProfileGesture1 = UITapGestureRecognizer(target: self, action: #selector(actionGoToAuthorProfile))
+        labelAuthorFullName.addGestureRecognizer(goToAuthorProfileGesture1)
+        
     }
     
     // MARK: Actions

@@ -8,25 +8,32 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import FirebaseStorage
 
 class AddPostViewController: UIViewController {
 
     // MARK: Variables
     
     @IBOutlet weak var textViewPost: UITextView!
+    @IBOutlet weak var imageViewAddImage: UIImageView!
     
-    var currentUser = Auth.auth().currentUser!
-    static var db = Database.database().reference()
-    var dbUsers = db.child("users")
-    var dbPosts = db.child("posts")
+    let currentUser = Auth.auth().currentUser!
+    static let db = Database.database().reference()
+    let dbUsers = db.child("users")
+    let dbPosts = db.child("posts")
+    let dbMemes = db.child("memes")
+    
+    var storage = Storage.storage().reference()
+    
+    var imageData: Data?
     
     // MARK: Lifecycle methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
         configureNavigationItem()
+        configureGestures()
     }
     
     func configureNavigationItem() {
@@ -41,10 +48,19 @@ class AddPostViewController: UIViewController {
         navigationItem.leftBarButtonItem = buttonCancel
     }
     
+    func configureGestures() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(actionAddImage))
+        imageViewAddImage.addGestureRecognizer(gesture)
+    }
+    
     // MARK: Actions
     
     @objc func actionCancel() {
         dismiss(animated: true)
+    }
+    
+    @objc func actionAddImage(_ sender: UIButton) {
+        showImagePicker()
     }
     
     @objc func actionPost() {
@@ -60,14 +76,29 @@ class AddPostViewController: UIViewController {
             "id": postRef.key,
             "author": currentUser.uid,
             "content": content,
-            "type": "text",
+            "type": imageData == nil ? "text" : "image",
             "date": date
         ]
         
         postRef.setValue(data) { error, databaseReference in
+            
+            if let imageData = self.imageData {
+                self.uploadPostImage(imageData: imageData, reference: postRef)
+            }
+            
             NotificationCenter.default.post(name: Notification.Name("postPublished"), object: nil)
             self.dismiss(animated: true)
         }
+    }
+    
+    // MARK: Functions
+    
+    func showImagePicker() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        present(imagePicker, animated: true)
     }
 
 }

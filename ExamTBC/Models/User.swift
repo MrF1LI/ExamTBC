@@ -20,6 +20,7 @@ struct User {
     var minor: String?
     
     var profilePicture: String?
+    var birthDate: String?
     
 }
 

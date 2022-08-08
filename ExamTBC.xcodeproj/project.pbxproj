@@ -55,6 +55,8 @@
 		4E6A2A312898586300041171 /* ReviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E6A2A2F2898586300041171 /* ReviewCell.xib */; };
 		4E6A2A332898589300041171 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6A2A322898589300041171 /* Review.swift */; };
 		4E6A2A35289858FD00041171 /* CosmosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6A2A34289858FD00041171 /* CosmosView.swift */; };
+		4E6E000E28A03388009404A9 /* AddMemePickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6E000D28A03388009404A9 /* AddMemePickers.swift */; };
+		4E6E001028A0341A009404A9 /* AddPostPickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6E000F28A0341A009404A9 /* AddPostPickers.swift */; };
 		4E7866E7289966F8002882B4 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7866E5289966F8002882B4 /* PostCell.swift */; };
 		4E7866E8289966F8002882B4 /* PostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E7866E6289966F8002882B4 /* PostCell.xib */; };
 		4E7866EA2899726C002882B4 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7866E92899726C002882B4 /* Post.swift */; };
@@ -62,8 +64,6 @@
 		4E7866EE2899981C002882B4 /* ConfigPostActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7866ED2899981C002882B4 /* ConfigPostActions.swift */; };
 		4EA01022289BC32000961B68 /* TextPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA01020289BC32000961B68 /* TextPostCell.swift */; };
 		4EA01023289BC32000961B68 /* TextPostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EA01021289BC32000961B68 /* TextPostCell.xib */; };
-		4EA0102A289BC35400961B68 /* PollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA01028289BC35400961B68 /* PollCell.swift */; };
-		4EA0102B289BC35400961B68 /* PollCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EA01029289BC35400961B68 /* PollCell.xib */; };
 		4EA0102E289BC37700961B68 /* ImagePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA0102C289BC37700961B68 /* ImagePostCell.swift */; };
 		4EA0102F289BC37700961B68 /* ImagePostCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4EA0102D289BC37700961B68 /* ImagePostCell.xib */; };
 		4EA01031289C0DA100961B68 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA01030289C0DA100961B68 /* CommentsViewController.swift */; };
@@ -118,6 +118,8 @@
 		4E6A2A2F2898586300041171 /* ReviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewCell.xib; sourceTree = "<group>"; };
 		4E6A2A322898589300041171 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		4E6A2A34289858FD00041171 /* CosmosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosView.swift; sourceTree = "<group>"; };
+		4E6E000D28A03388009404A9 /* AddMemePickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemePickers.swift; sourceTree = "<group>"; };
+		4E6E000F28A0341A009404A9 /* AddPostPickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostPickers.swift; sourceTree = "<group>"; };
 		4E7866E5289966F8002882B4 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		4E7866E6289966F8002882B4 /* PostCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostCell.xib; sourceTree = "<group>"; };
 		4E7866E92899726C002882B4 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -125,8 +127,6 @@
 		4E7866ED2899981C002882B4 /* ConfigPostActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigPostActions.swift; sourceTree = "<group>"; };
 		4EA01020289BC32000961B68 /* TextPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPostCell.swift; sourceTree = "<group>"; };
 		4EA01021289BC32000961B68 /* TextPostCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextPostCell.xib; sourceTree = "<group>"; };
-		4EA01028289BC35400961B68 /* PollCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollCell.swift; sourceTree = "<group>"; };
-		4EA01029289BC35400961B68 /* PollCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PollCell.xib; sourceTree = "<group>"; };
 		4EA0102C289BC37700961B68 /* ImagePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePostCell.swift; sourceTree = "<group>"; };
 		4EA0102D289BC37700961B68 /* ImagePostCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagePostCell.xib; sourceTree = "<group>"; };
 		4EA01030289C0DA100961B68 /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
@@ -254,6 +254,8 @@
 				4E2E316E289A980B00048465 /* ConfigEditProfilePickers.swift */,
 				4EA01037289C26EC00961B68 /* ConfigComments.swift */,
 				4E33ECF0289D12BC003DC7FD /* ConfigStudentInfo2.swift */,
+				4E6E000D28A03388009404A9 /* AddMemePickers.swift */,
+				4E6E000F28A0341A009404A9 /* AddPostPickers.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -311,7 +313,6 @@
 		4EA0101E289BC2B200961B68 /* Posts */ = {
 			isa = PBXGroup;
 			children = (
-				4EA01027289BC34300961B68 /* PollCell */,
 				4EA01024289BC32800961B68 /* ImagePostCell */,
 				4EA0101F289BC30900961B68 /* TextPostCell */,
 				4E7866E4289966E2002882B4 /* PostCell */,
@@ -335,15 +336,6 @@
 				4EA0102D289BC37700961B68 /* ImagePostCell.xib */,
 			);
 			path = ImagePostCell;
-			sourceTree = "<group>";
-		};
-		4EA01027289BC34300961B68 /* PollCell */ = {
-			isa = PBXGroup;
-			children = (
-				4EA01028289BC35400961B68 /* PollCell.swift */,
-				4EA01029289BC35400961B68 /* PollCell.xib */,
-			);
-			path = PollCell;
 			sourceTree = "<group>";
 		};
 		4EA01032289C14CD00961B68 /* PostCell */ = {
@@ -436,7 +428,6 @@
 				4E1E85392897FFD3007B01D5 /* Assets.xcassets in Resources */,
 				4E6A2A2A289857A500041171 /* LecturerCell.xib in Resources */,
 				4E1E85372897FFD2007B01D5 /* Main.storyboard in Resources */,
-				4EA0102B289BC35400961B68 /* PollCell.xib in Resources */,
 				4EA01036289C14EA00961B68 /* CommentCell.xib in Resources */,
 				4E6A2A102898412100041171 /* StudentInfoCell.xib in Resources */,
 			);
@@ -452,7 +443,6 @@
 				4E7866EC2899750A002882B4 /* ConfigPosts.swift in Sources */,
 				4E6A2A0A289840CA00041171 /* ConfigStudentInfo.swift in Sources */,
 				4E6A2A2C2898581200041171 /* ConfigReviews.swift in Sources */,
-				4EA0102A289BC35400961B68 /* PollCell.swift in Sources */,
 				4E7866E7289966F8002882B4 /* PostCell.swift in Sources */,
 				4E1E855628980492007B01D5 /* LoginViewController.swift in Sources */,
 				4E33ECF1289D12BC003DC7FD /* ConfigStudentInfo2.swift in Sources */,
@@ -475,9 +465,11 @@
 				4E6A2A35289858FD00041171 /* CosmosView.swift in Sources */,
 				4E1E855D28981D65007B01D5 /* MemesViewController.swift in Sources */,
 				4E6A2A0F2898412100041171 /* StudentInfoCell.swift in Sources */,
+				4E6E000E28A03388009404A9 /* AddMemePickers.swift in Sources */,
 				4E1E856128981D7D007B01D5 /* ProfileViewController.swift in Sources */,
 				4EA0102E289BC37700961B68 /* ImagePostCell.swift in Sources */,
 				4E1E85322897FFD2007B01D5 /* SceneDelegate.swift in Sources */,
+				4E6E001028A0341A009404A9 /* AddPostPickers.swift in Sources */,
 				4EA01035289C14EA00961B68 /* CommentCell.swift in Sources */,
 				4EA01038289C26EC00961B68 /* ConfigComments.swift in Sources */,
 				4EA01031289C0DA100961B68 /* CommentsViewController.swift in Sources */,

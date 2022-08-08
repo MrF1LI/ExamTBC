@@ -58,29 +58,51 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="egp-g4-8Jy">
-                                <rect key="frame" x="20.5" y="52" width="373" height="800"/>
+                                <rect key="frame" x="20.5" y="152" width="373" height="700"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c5P-kS-ehZ">
+                                <rect key="frame" x="20.5" y="52" width="373" height="100"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo.on.rectangle.angled" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="J6r-5r-QVx">
+                                        <rect key="frame" x="0.0" y="-0.5" width="100" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="J6r-5r-QVx" secondAttribute="height" id="AFp-WA-ne6"/>
+                                            <constraint firstAttribute="width" constant="100" id="uXN-rz-6C0"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="J6r-5r-QVx" firstAttribute="leading" secondItem="c5P-kS-ehZ" secondAttribute="leading" id="PnR-43-r1Y"/>
+                                    <constraint firstItem="J6r-5r-QVx" firstAttribute="top" secondItem="c5P-kS-ehZ" secondAttribute="top" id="YMv-dF-ktN"/>
+                                    <constraint firstAttribute="bottom" secondItem="J6r-5r-QVx" secondAttribute="bottom" id="hqX-EO-3dz"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="x72-ZU-vM5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="x72-ZU-vM5" firstAttribute="bottom" secondItem="egp-g4-8Jy" secondAttribute="bottom" constant="10" id="4hb-Tj-dc3"/>
+                            <constraint firstItem="c5P-kS-ehZ" firstAttribute="top" secondItem="x72-ZU-vM5" secondAttribute="top" constant="8" id="JgI-uw-avm"/>
                             <constraint firstItem="egp-g4-8Jy" firstAttribute="width" secondItem="UbW-5P-IN9" secondAttribute="width" multiplier="0.9" id="Lb7-xY-mxS"/>
                             <constraint firstItem="egp-g4-8Jy" firstAttribute="centerX" secondItem="UbW-5P-IN9" secondAttribute="centerX" id="Onm-rc-UVZ"/>
-                            <constraint firstItem="egp-g4-8Jy" firstAttribute="top" secondItem="x72-ZU-vM5" secondAttribute="top" constant="8" id="bl7-FC-dqC"/>
+                            <constraint firstItem="egp-g4-8Jy" firstAttribute="top" secondItem="c5P-kS-ehZ" secondAttribute="bottom" id="WaL-9H-2j3"/>
+                            <constraint firstItem="c5P-kS-ehZ" firstAttribute="width" secondItem="UbW-5P-IN9" secondAttribute="width" multiplier="0.9" id="dYq-Jq-RD2"/>
+                            <constraint firstItem="c5P-kS-ehZ" firstAttribute="centerX" secondItem="UbW-5P-IN9" secondAttribute="centerX" id="kdr-XV-Tjy"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="imageViewAddImage" destination="J6r-5r-QVx" id="fz1-nf-Y29"/>
                         <outlet property="textViewPost" destination="egp-g4-8Jy" id="6d7-ld-zxD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ea3-Eg-QK5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-178" y="3812"/>
+            <point key="canvasLocation" x="-178.2608695652174" y="3811.6071428571427"/>
         </scene>
         <!--Add Meme View Controller-->
         <scene sceneID="f9e-Pu-PV1">

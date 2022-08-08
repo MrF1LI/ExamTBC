@@ -87,22 +87,8 @@ class TextPostCell: UITableViewCell {
         ref.observeSingleEvent(of: .value) { snapshot in
             
             if snapshot.hasChild(Auth.auth().currentUser!.uid) {
-
-                self.imageViewHeart.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-
-                UIView.animate(
-                    withDuration: 1.2,
-                    delay: 0.0,
-                    usingSpringWithDamping: 0.2,
-                    initialSpringVelocity: 0.2,
-                    options: .curveEaseOut,
-                    animations: {
-                        self.imageViewHeart.transform = CGAffineTransform(scaleX: 1, y: 1)
-                        self.imageViewHeart.image = UIImage(systemName: "heart.fill")
-                        self.imageViewHeart.tintColor = .systemPink
-                    },
-                    completion: nil)
-
+                self.imageViewHeart.image = UIImage(systemName: "heart.fill")
+                self.imageViewHeart.tintColor = .systemPink
             } else {
                 self.imageViewHeart.image = UIImage(systemName: "heart")
                 self.imageViewHeart.tintColor = .black

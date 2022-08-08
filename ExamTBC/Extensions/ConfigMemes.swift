@@ -25,7 +25,7 @@ extension MemesViewController: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size: CGFloat = collectionViewMemes.frame.width / 3 - 1
+        let size: CGFloat = collectionViewMemes.frame.width / CGFloat(scale) - 1
         return CGSize(width: size, height: size)
     }
     

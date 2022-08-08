@@ -49,8 +49,9 @@ extension DataSnapshot {
                         email: value?["email"] as? String ?? "",
                         course: value?["course"] as? String ?? "",
                         faculty: value?["faculty"] as? String ?? "",
-                        minor: value?["faculty"] as? String ?? "",
-                        profilePicture: value?["profile"] as? String ?? "")
+                        minor: value?["minor"] as? String ?? "",
+                        profilePicture: value?["profile"] as? String ?? "",
+                        birthDate: value?["date"] as? String ?? "")
         
         return user
     }

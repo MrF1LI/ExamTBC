@@ -61,24 +61,26 @@ class EditProfileViewController: UIViewController {
         
         dbUsers.child(currentUser.uid).observeSingleEvent(of: .value) { snapshot in
             
-            let value = snapshot.value as? NSDictionary
-            let user = User(id: value?["id"] as? String ?? "",
-                            name: value?["name"] as? String ?? "",
-                            surname: value?["surname"] as? String ?? "",
-                            age: value?["age"] as? Int ?? 0,
-                            email: value?["email"] as? String ?? "")
+            let user = snapshot.getValueAsUser()
             
-            let faculty = value?["faculty"] as? String ?? ""
-            let course = value?["course"] as? String ?? ""
-            let dateAsString = value?["date"] as? String ?? ""
-            let minor = value?["minor"] as? String ?? ""
+//            let value = snapshot.value as? NSDictionary
+//            let user = User(id: value?["id"] as? String ?? "",
+//                            name: value?["name"] as? String ?? "",
+//                            surname: value?["surname"] as? String ?? "",
+//                            age: value?["age"] as? Int ?? 0,
+//                            email: value?["email"] as? String ?? "")
+//
+//            let faculty = value?["faculty"] as? String ?? ""
+//            let course = value?["course"] as? String ?? ""
+//            let dateAsString = value?["date"] as? String ?? ""
+//            let minor = value?["minor"] as? String ?? ""
             
             // String to date
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = .short
 
-            let dateObj = dateFormatter.date(from: dateAsString)
+            let dateObj = dateFormatter.date(from: user.birthDate ?? "")
 
             self.datePicker.date = dateObj ?? Date.now
             
@@ -90,12 +92,12 @@ class EditProfileViewController: UIViewController {
                         
             self.textFieldName.text = user.name
             self.textFieldSurname.text = user.surname
-            self.textFieldCourse.text = course
-            self.textFieldFaculty.text = faculty
+            self.textFieldCourse.text = user.course
+            self.textFieldFaculty.text = user.faculty
             self.textFieldDate.text = formatter.string(from: self.datePicker.date)
             
-            if !minor.isEmpty {
-                self.textFieldMinor.text = minor
+            if !(user.minor ?? "").isEmpty {
+                self.textFieldMinor.text = user.minor
                 self.textFieldMinor.isEnabled = true
                 self.switchMinor.isOn = true
             } else {
@@ -105,21 +107,25 @@ class EditProfileViewController: UIViewController {
             
             // Load Profile Picture
             
-            let url = value?["profile"] as? String
+            self.imageViewProfile.sd_setImage(with: URL(string: user.profilePicture ?? ""),
+                                              placeholderImage: UIImage(named: "user"),
+                                              options: .continueInBackground,
+                                              completed: nil)
 
-            if let imageUrlString = url {
-                
-                self.imageViewProfile.sd_setImage(with: URL(string: imageUrlString),
-                                             placeholderImage: UIImage(named: "user"),
-                                             options: .continueInBackground,
-                                             completed: nil)
-
-            } else {
-                self.imageViewProfile.sd_setImage(with: URL(string: self.currentUser.photoURL!.absoluteString),
-                                             placeholderImage: UIImage(named: "user"),
-                                             options: .continueInBackground,
-                                             completed: nil)
-            }
+//            let url = user.profilePicture
+//            if let imageUrlString = url {
+//
+//                self.imageViewProfile.sd_setImage(with: URL(string: imageUrlString),
+//                                             placeholderImage: UIImage(named: "user"),
+//                                             options: .continueInBackground,
+//                                             completed: nil)
+//
+//            } else {
+//                self.imageViewProfile.sd_setImage(with: URL(string: self.currentUser.photoURL!.absoluteString),
+//                                             placeholderImage: UIImage(named: "user"),
+//                                             options: .continueInBackground,
+//                                             completed: nil)
+//            }
             
             //
             
@@ -252,5 +258,5 @@ class EditProfileViewController: UIViewController {
         NotificationCenter.default.post(name: NSNotification.Name("profileEdited"), object: nil, userInfo: nil)
         navigationController?.popViewController(animated: true)
     }
-    
+
 }

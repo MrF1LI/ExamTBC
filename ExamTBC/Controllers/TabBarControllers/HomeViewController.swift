@@ -70,8 +70,6 @@ class HomeViewController: UIViewController {
         
         dbUsers.child(currentUser.uid).observe(.value) { snapshot in
             let value = snapshot.value as? NSDictionary
-
-            // Load Profile Picture
             
             let url = value?["profile"] as? String ?? ""
 
@@ -79,8 +77,6 @@ class HomeViewController: UIViewController {
                                                placeholderImage: UIImage(named: "user"),
                                                options: .continueInBackground,
                                                completed: nil)
-            
-            //
         }
     }
     
@@ -99,7 +95,7 @@ class HomeViewController: UIViewController {
         
         tableViewPosts.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         
-        dbPosts.observeSingleEvent(of: .value) { snapshot in
+        dbPosts.observe(.value) { snapshot in
             
             self.arrayOfPosts.removeAll()
             
