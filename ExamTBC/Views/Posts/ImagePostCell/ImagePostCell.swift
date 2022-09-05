@@ -16,7 +16,8 @@ class ImagePostCell: UITableViewCell {
     @IBOutlet weak var labelAuthorFullName: UILabel!
     @IBOutlet weak var labelCourseAndFaculty: UILabel!
     @IBOutlet weak var imageViewAuthorProfile: UIImageView!
-    @IBOutlet weak var imageViewContent: UIImageView!
+//    @IBOutlet weak var imageViewContent: UIImageView!
+    @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var labelContent: UILabel!
     
     @IBOutlet weak var imageViewHeart: UIImageView!
@@ -24,17 +25,22 @@ class ImagePostCell: UITableViewCell {
     @IBOutlet weak var imageViewShare: UIImageView!
     @IBOutlet weak var imageViewSave: UIImageView!
     
-    var delegate: PostCellDelegate!
+    @IBOutlet weak var collectionViewImages: UICollectionView!
     
-    var dbPosts = Database.database().reference().child("posts")
+    var delegate: PostCellDelegate!
+        
+    var arrayOfImages = [String]()
     
     // MARK: Lifecycle methods
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
         configureDesign()
         configureButtons()
+        configureCollectionView()
+        configurePageControl()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -58,21 +64,17 @@ class ImagePostCell: UITableViewCell {
     }
     
     func configure(with post: ImagePost) {
-        
-        let dbUsers = Database.database().reference().child("users")
-        
+                
         if let content = post.text {
             labelContent.text = content
         } else {
-            labelContent.backgroundColor = .blue
+            labelContent.isHidden = true
         }
         
-        imageViewContent.sd_setImage(with: URL(string: post.imageUrl),
-                                      placeholderImage: UIImage(named: "photo"),
-                                      options: .continueInBackground,
-                                      completed: nil)
-        
-        dbUsers.child(post.author).observe(.value) { snapshot in
+        arrayOfImages = post.images
+        pageControl.numberOfPages = arrayOfImages.count
+                
+        FirebaseService.dbUsers.child(post.author).observe(.value) { snapshot in
             let value = snapshot.value as? NSDictionary
             
             let name = value?["name"] as? String ?? ""
@@ -93,8 +95,8 @@ class ImagePostCell: UITableViewCell {
                                               completed: nil)
         }
         
-        let ref = dbPosts.child(post.id).child("reacts")
-        ref.observeSingleEvent(of: .value) { snapshot in
+        let referenceOfReacts = FirebaseService.dbPosts.child(post.id).child("reacts")
+        referenceOfReacts.observeSingleEvent(of: .value) { snapshot in
             
             if snapshot.hasChild(Auth.auth().currentUser!.uid) {
                 self.imageViewHeart.image = UIImage(systemName: "heart.fill")
@@ -129,6 +131,18 @@ class ImagePostCell: UITableViewCell {
         let goToAuthorProfileGesture1 = UITapGestureRecognizer(target: self, action: #selector(actionGoToAuthorProfile))
         labelAuthorFullName.addGestureRecognizer(goToAuthorProfileGesture1)
         
+    }
+    
+    func configureCollectionView() {
+        collectionViewImages.delegate = self
+        collectionViewImages.dataSource = self
+        collectionViewImages.register(UINib(nibName: "PostImageCell", bundle: nil), forCellWithReuseIdentifier: "PostImageCell")
+    }
+    
+    func configurePageControl() {
+        pageControl.currentPage = 0
+        pageControl.numberOfPages = arrayOfImages.count
+        pageControl.isUserInteractionEnabled = false
     }
     
     // MARK: Actions

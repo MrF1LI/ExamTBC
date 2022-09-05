@@ -19,13 +19,7 @@ class ReviewCell: UITableViewCell {
     @IBOutlet weak var labelReview: UILabel!
     
     @IBOutlet weak var lecturerRating: CosmosView!
-    
-    // MARK: Variables
-    
-    static var db = Database.database().reference()
-    var dbLecturers = db.child("lecturers")
-    var dbUsers = db.child("users")
-        
+            
     // MARK: Lifecycle methods
 
     override func awakeFromNib() {
@@ -49,12 +43,14 @@ class ReviewCell: UITableViewCell {
         labelReview.text = review.text
         labelDate.text = review.date
         
-        dbLecturers.child(review.lecturer!).child("rates").child(review.author).observeSingleEvent(of: .value) { snapshot in
+        let referenceOfRates = FirebaseService.dbLecturers.child(review.lecturer!).child("rates")
+        
+        referenceOfRates.child(review.author).observeSingleEvent(of: .value) { snapshot in
             let value = snapshot.value as? Double ?? 0
             self.lecturerRating.rating = value
         }
         
-        dbUsers.child(review.author).observeSingleEvent(of: .value) { snapshot in
+        FirebaseService.dbUsers.child(review.author).observeSingleEvent(of: .value) { snapshot in
             let value = snapshot.value as? NSDictionary
             
             let firstName = value?["name"] as? String ?? ""

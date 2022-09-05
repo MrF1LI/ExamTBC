@@ -15,39 +15,34 @@ class CommentsViewController: UIViewController {
     @IBOutlet weak var tableViewComments: UITableView!
     
     @IBOutlet weak var textFieldComment: UITextField!
+    @IBOutlet weak var textFieldCommentConstraint: NSLayoutConstraint!
     
     var arrayOfComments = [Comment]()
     
     var dbPosts = Database.database().reference().child("posts")
     var postId: String!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         configureAddCommentDesign()
         configTableViewComments()
         loadComments()
+        listenToKeyboard()
     }
     
     func loadComments() {
         dbPosts.child(postId).child("comments").observe(.value) { [self] snapshot in
-
+            
             self.arrayOfComments.removeAll()
-
+            
             for child in snapshot.children.allObjects as! [DataSnapshot] {
-
-                let data = child.value as? [String:AnyObject] ?? [:]
-                
-                let currentComment = Comment(id: data["id"] as? String ?? "",
-                                             author: data["author"] as? String ?? "",
-                                             content: data["content"] as? String ?? "")
-
+                let currentComment = Comment(with: child)
                 self.arrayOfComments.append(currentComment)
-
             }
-
+            
             self.tableViewComments.reloadData()
-
+            
         }
     }
     
@@ -55,7 +50,6 @@ class CommentsViewController: UIViewController {
         viewAddCommentBackground.layer.shadowOffset = CGSize(width: 0, height: -10)
         viewAddCommentBackground.layer.shadowRadius = 10
         viewAddCommentBackground.layer.shadowOpacity = 0.1
-        viewAddCommentBackground.bindToKeyboard()
     }
     
     func configTableViewComments() {
@@ -73,7 +67,7 @@ class CommentsViewController: UIViewController {
         
         let commentsRef = dbPosts.child(postId).child("comments")
         let commentRef = commentsRef.childByAutoId()
-                
+            
         let date = String(DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .none))
         
         let data = [
@@ -87,5 +81,45 @@ class CommentsViewController: UIViewController {
         
         textFieldComment.text = ""
     }
-
+    
+    // MARK: Change Keyboard Constraints
+    
+    func listenToKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        
+        let keyboardSize = (notification.userInfo?  [UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        
+        let keyboardHeight = keyboardSize?.height
+        
+        if #available(iOS 11.0, *){
+            self.textFieldCommentConstraint.constant = -keyboardHeight! + view.safeAreaInsets.bottom
+        }
+        else {
+            self.textFieldCommentConstraint.constant = view.safeAreaInsets.bottom
+        }
+        
+        UIView.animate(withDuration: 0.5){
+            self.view.layoutIfNeeded()
+        }
+        
+        
+    }
+    
+    
+    @objc func keyboardWillHide(notification: Notification){
+        
+        self.textFieldCommentConstraint.constant =  0 // or change according to your logic
+        
+        UIView.animate(withDuration: 0.5){
+            self.view.layoutIfNeeded()
+        }
+        
+    }
+    
 }
+

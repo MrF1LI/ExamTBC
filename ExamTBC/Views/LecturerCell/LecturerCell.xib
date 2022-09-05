@@ -43,7 +43,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IPq-hd-72P" customClass="CosmosView" customModule="TBCMidterm" customModuleProvider="target">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IPq-hd-72P" customClass="CosmosView" customModule="ExamTBC" customModuleProvider="target">
                         <rect key="frame" x="228" y="7" width="120" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="Hfc-TX-LYf"/>
@@ -102,6 +102,11 @@
             <point key="canvasLocation" x="45.652173913043484" y="139.95535714285714"/>
         </tableViewCell>
     </objects>
+    <designables>
+        <designable name="IPq-hd-72P">
+            <size key="intrinsicContentSize" width="120" height="20"/>
+        </designable>
+    </designables>
     <resources>
         <image name="user" width="360" height="360"/>
         <systemColor name="systemPinkColor">

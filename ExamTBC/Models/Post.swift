@@ -21,25 +21,31 @@ struct TextPost: Post {
     var date: Date
 }
 
+extension TextPost {
+    
+    init(with snapshot: DataSnapshot) {
+        let value = snapshot.value as! NSDictionary
+        self.id = value["id"] as! String
+        self.author = value["author"] as! String
+        self.content = value["content"] as! String
+        
+        let dateAsString = value["date"] as? String ?? ""
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .medium
+
+        let dateObj = dateFormatter.date(from: dateAsString) ?? Date.now
+        
+        self.date = dateObj
+    }
+    
+}
+
 struct ImagePost: Post {
     var id: String
     var author: String
     var text: String?
-    var imageUrl: String
+    var images: [String]
     var date: Date
-}
-
-struct Poll: Post {
-    
-    struct Option {
-        let id: String
-        let content: String
-    }
-    
-    var id: String
-    var author: String
-    var question: String
-    var options: [Option]
-    var date: Date
-    
 }

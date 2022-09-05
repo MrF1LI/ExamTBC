@@ -43,9 +43,9 @@ class LoginViewController: UIViewController {
                 
                 // If user is registered
                 
-                let dbUsers = Database.database().reference().child("users")
+                let referenceOfCurrentUser = FirebaseService.dbUsers.child(FirebaseService.currentUser!.uid)
                 
-                dbUsers.child(Auth.auth().currentUser!.uid).observeSingleEvent(of: .value) { snapshot in
+                referenceOfCurrentUser.observeSingleEvent(of: .value) { snapshot in
                     print(snapshot.exists())
                     if snapshot.exists() {
                         self.goToMainPage()

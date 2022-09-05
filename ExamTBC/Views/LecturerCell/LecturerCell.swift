@@ -33,7 +33,7 @@ class LecturerCell: UITableViewCell {
         lecturerRating.isUserInteractionEnabled = false
     }
     
-    func setInformation(lecturer: Lecturer) {
+    func setInformation(lecturer: LecturerViewModel) {
         labelFullName.text = "\(lecturer.name) \(lecturer.surname)"
         labelSubject.text = lecturer.subject
         labelRating.text = String(format: "%.1f", lecturer.rating)

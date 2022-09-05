@@ -19,9 +19,7 @@ class UserProfileViewController: UIViewController {
     @IBOutlet weak var tableViewStudentInfoHeight: NSLayoutConstraint!
     
     var arrayOfStudentInfo = [UserInfo]()
-    
-    var dbUsers = Database.database().reference().child("users")
-    
+        
     var currentUserId: String!
     
     // MARK: Lifecycle methods
@@ -74,52 +72,19 @@ class UserProfileViewController: UIViewController {
         
         tableViewStudentInfo.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
 
-        dbUsers.child(currentUserId).observe(.value) { snapshot in
-            
-            self.arrayOfStudentInfo.removeAll()
-            
-            let value = snapshot.value as? NSDictionary
-            let user = User(id: value?["id"] as? String ?? "",
-                            name: value?["name"] as? String ?? "",
-                            surname: value?["surname"] as? String ?? "",
-                            age: value?["age"] as? Int ?? 0,
-                            email: value?["email"] as? String ?? "")
-            
-            // load user info
-            
-            let faculty = value?["faculty"] as? String ?? ""
-            let course = value?["course"] as? String ?? ""
-            let minor = value?["minor"] as? String ?? ""
-            
+        FirebaseService.shared.fetchUserInfo(by: currentUserId) { user, userInfo in
             self.labelUserFullName.text = "\(user.name) \(user.surname)"
             self.labelUserEmail.text = "\(user.email)"
             
-            var userInfo = [
-                UserInfo(name: "\(user.age)", image: .age),
-                UserInfo(name: course, image: .course),
-                UserInfo(name: faculty, image: .faculty)
-            ]
-            
-            if !minor.isEmpty {
-                userInfo.append(UserInfo(name: "Minor: \(minor)", image: .minor))
-            }
-                        
             self.arrayOfStudentInfo.append(contentsOf: userInfo)
             self.tableViewStudentInfo.reloadData()
             
-            // Load Profile Picture
-            
-            let url = value?["profile"] as? String ?? ""
-            
-            self.imageViewUserProfile.sd_setImage(with: URL(string: url),
+            self.imageViewUserProfile.sd_setImage(with: URL(string: user.profilePicture ?? ""),
                                               placeholderImage: UIImage(named: "user"),
                                               options: .continueInBackground,
                                               completed: nil)
-            
-            //
-            
         }
-        
+    
     }
 
 }

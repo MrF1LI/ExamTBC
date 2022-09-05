@@ -17,12 +17,7 @@ class RatesViewController: UIViewController {
     @IBOutlet weak var tableViewLecturersHeight: NSLayoutConstraint!
     
     var arrayOfLecturers = [Lecturer]()
-    
-    var currentUser = Auth.auth().currentUser!
-    static var db = Database.database().reference()
-    var dbUsers = db.child("users")
-    var dbLecturers = db.child("lecturers")
-    
+        
     // MARK: LIfecycle methods
 
     override func viewDidLoad() {
@@ -56,48 +51,79 @@ class RatesViewController: UIViewController {
     // MARK: Initial Functions
     
     func configureTableView() {
-        
-        tableViewLecturers.delegate = self
-        tableViewLecturers.dataSource = self
-        tableViewLecturers.register(UINib(nibName: "LecturerCell", bundle: nil), forCellReuseIdentifier: "LecturerCell")
+//        tableViewLecturers.delegate = self
+//        tableViewLecturers.dataSource = self
+//        tableViewLecturers.register(UINib(nibName: "LecturerCell", bundle: nil), forCellReuseIdentifier: "LecturerCell")
         
         tableViewLecturers.layer.cornerRadius = 35
-
     }
     
     func loadLecturers() {
-        
         tableViewLecturers.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         
-        
-        dbLecturers.observe(.value) { snapshot in
-            
-            self.arrayOfLecturers.removeAll()
-            
-            for child in snapshot.children.allObjects as! [DataSnapshot] {
-                
-                let data = child.value as? [String : AnyObject] ?? [:]
-                
-                let ratesDict = data["rates"] as! [String: Float]
-                let rates = ratesDict.map { _, rate in rate }
-                let rating = Float(rates.reduce(0, +)) / Float(rates.count)
-                
-                let currentLecturer = Lecturer(id: data["id"] as? String ?? "",
-                                               name: data["name"] as? String ?? "",
-                                               surname: data["surname"] as? String ?? "",
-                                               email: data["email"] as? String ?? "",
-                                               subject: data["subject"] as? String ?? "",
-                                               rating: rating,
-                                               profileImage: data["profile"] as? String ?? "")
-                
-                                
-                self.arrayOfLecturers.append(currentLecturer)
-            }
-                                    
+        FirebaseService.shared.fetchLecturers { arrayOfLecturers in
+            self.arrayOfLecturers = arrayOfLecturers
             self.tableViewLecturers.reloadData()
         }
-        
-                
     }
 
+}
+
+class RatesViewModel {
+    
+    let firebaseManager: FirebaseService
+    
+    required init(with firebaseManager: FirebaseService)  {
+        self.firebaseManager = firebaseManager
+    }
+    
+    func getLecturersList(completion: @escaping (([LecturerViewModel]) -> Void)) {
+        firebaseManager.fetchLecturers { arrayOfLecturers in
+            DispatchQueue.main.async {
+                
+                let countriesViewModels =  arrayOfLecturers.map { LecturerViewModel(lecturer: $0) }
+                completion(countriesViewModels)
+            }
+        }
+    }
+    
+}
+
+class RatesDataSource: NSObject {
+    
+    private var tableView: UITableView
+    private var viewModel: RatesViewModel
+    private var arrayOfLecturers: [LecturerViewModel] = []
+    
+    init(tableView: UITableView, viewModel: RatesViewModel) {
+        self.tableView = tableView
+        self.viewModel = viewModel
+        super.init()
+        setUpDelegates()
+    }
+    
+    private func setUpDelegates() {
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+    }
+
+}
+
+extension RatesDataSource: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        arrayOfLecturers.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LecturerCell", for: indexPath) as? LecturerCell
+        guard let cell = cell else { return UITableViewCell() }
+        
+        let currentLecturer = arrayOfLecturers[indexPath.row]
+        cell.setInformation(lecturer: currentLecturer)
+        
+        return cell
+    }
+    
+    
 }

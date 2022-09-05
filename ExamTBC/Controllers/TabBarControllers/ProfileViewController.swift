@@ -20,9 +20,6 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var tableViewStudentInfo: UITableView!
     @IBOutlet weak var tableViewStudentInfoHeight: NSLayoutConstraint!
     
-    var currentUser = Auth.auth().currentUser!
-    var dbUsers = Database.database().reference().child("users")
-    
     var arrayOfStudentInfo = [UserInfo]()
     
     // MARK: Lifecycle methods
@@ -34,27 +31,6 @@ class ProfileViewController: UIViewController {
         configureUserProfile()
         configureNotificationCenter()
         configureTableViewStudentInfo()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        tableViewStudentInfo.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        tableViewStudentInfo.removeObserver(self, forKeyPath: "contentSize")
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        
-        if keyPath == "contentSize" {
-            if object is UITableView {
-                if let newValue = change?[.newKey] {
-                    let newSize = newValue as! CGSize
-                    self.tableViewStudentInfoHeight.constant = newSize.height
-                }
-            }
-        }
-        
     }
     
     // MARK: Initial Functions
@@ -94,9 +70,7 @@ class ProfileViewController: UIViewController {
     }
     
     @objc func reloadUserInfo() {
-//        loadUserInfo()
         tableViewStudentInfo.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
-//        tableViewStudentInfo.reloadData()
     }
     
     // MARK: Functions
@@ -105,28 +79,14 @@ class ProfileViewController: UIViewController {
         
         tableViewStudentInfo.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         
-        dbUsers.child(currentUser.uid).observe(.value) { snapshot in
-            self.arrayOfStudentInfo.removeAll()
-            
-            let user = snapshot.getValueAsUser()
-            
+        let currentUserId = FirebaseService.currentUser!.uid
+        
+        FirebaseService.shared.fetchUserInfo(by: currentUserId) { user, userInfo in
             self.labelFullName.text = "\(user.name) \(user.surname)"
             self.labelEmail.text = "\(user.email)"
             
-            var userInfo = [
-                UserInfo(name: "\(user.age)", image: .age),
-                UserInfo(name: user.course ?? "", image: .course),
-                UserInfo(name: user.faculty ?? "", image: .faculty)
-            ]
-            
-            if !(user.minor ?? "").isEmpty {
-                userInfo.append(UserInfo(name: "Minor: \(user.minor ?? "")", image: .minor))
-            }
-                        
             self.arrayOfStudentInfo.append(contentsOf: userInfo)
             self.tableViewStudentInfo.reloadData()
-            
-            //
             
             self.imageViewProfile.sd_setImage(with: URL(string: user.profilePicture ?? ""),
                                               placeholderImage: UIImage(named: "user"),

@@ -23,19 +23,14 @@ class RegisterViewController: UIViewController {
     
     // MARK: Variables
     
-    var dbUsers = Database.database().reference().child("users")
-    var currentUser = Auth.auth().currentUser!
-    
-    var storage = Storage.storage().reference()
-    
     var profileImageData: Data?
     
     var datePicker = UIDatePicker()
     var coursePicker = UIPickerView()
     var facultyPicker = UIPickerView()
     
-    var arrayOfCourses = ["I Course", "II Course", "III Course", "IV Course"]
-    var arrayOfFaculties = ["Information Technologies", "Management", "Finance", "Digital Marketing"]
+    let arrayOfCourses = ["I Course", "II Course", "III Course", "IV Course"]
+    let arrayOfFaculties = ["Information Technologies", "Management", "Finance", "Digital Marketing"]
     
     // MARK: Lifecycle methods
 
@@ -54,54 +49,18 @@ class RegisterViewController: UIViewController {
     
     func configureRegistrationForm() {
         
-        let currentUserFullName = currentUser.displayName!.components(separatedBy: " ")
+        let currentUserFullName = FirebaseService.currentUser!.displayName!.components(separatedBy: " ")
         
         textFieldName.text = currentUserFullName[0]
         textFieldSurname.text = currentUserFullName[1]
         
-        if let data = try? Data(contentsOf: currentUser.photoURL!)
-        {
-            imageViewProfile.image = UIImage(data: data)
-        }
-        
         imageViewProfile.layer.cornerRadius = imageViewProfile.frame.width / 2
         
-    }
-    
-    func createDatePicker() {
+        imageViewProfile.sd_setImage(with: URL(string: FirebaseService.currentUser!.photoURL!.absoluteString),
+                                     placeholderImage: UIImage(named: "user"),
+                                     options: .continueInBackground,
+                                     completed: nil)
         
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        
-        let buttonDone = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(actionDatePicker))
-        toolbar.setItems([buttonDone], animated: true)
-        
-        datePicker.datePickerMode = .date
-        datePicker.preferredDatePickerStyle = .wheels
-
-        textFieldDate.inputAccessoryView = toolbar
-        textFieldDate.inputView = datePicker
-        
-    }
-    
-    func configureCoursePicker() {
-        coursePicker.delegate = self
-        coursePicker.dataSource = self
-        textFieldCourse.inputView = coursePicker
-        coursePicker.tag = 1
-    }
-    
-    func configureFacultyPicker() {
-        facultyPicker.delegate = self
-        facultyPicker.dataSource = self
-        textFieldFaculty.inputView = facultyPicker
-        facultyPicker.tag = 2
-    }
-    
-    func configureProfileImageView() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(actionImageViewProfile))
-        imageViewProfile.addGestureRecognizer(gesture)
-        imageViewProfile.contentMode = .scaleAspectFill
     }
     
     // MARK: Actions
@@ -119,7 +78,7 @@ class RegisterViewController: UIViewController {
         }
         
         let date = DateFormatter.localizedString(from: datePicker.date, dateStyle: .short, timeStyle: .none)
-
+        
         registerUser(name: name, surname: surname, date: date, course: course, faculty: faculty)
         
     }
@@ -141,27 +100,19 @@ class RegisterViewController: UIViewController {
     
     // MARK: Functions
     
-    func showImagePicker() {
-        let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = .photoLibrary
-        imagePicker.delegate = self
-        imagePicker.allowsEditing = true
-        present(imagePicker, animated: true)
-    }
-    
     func registerUser(name: String, surname: String, date: String, course: String, faculty: String) {
         
-        let userRef = dbUsers.child(currentUser.uid)
+        let userRef = FirebaseService.dbUsers.child(FirebaseService.currentUser!.uid)
         let age = datePicker.date.getAge()
         
         let userInfo: [String : Any] = [
-            "id": currentUser.uid,
+            "id": FirebaseService.currentUser!.uid,
             "name": name,
             "surname": surname,
             "date": date,
             "course": course,
             "faculty": faculty,
-            "email": currentUser.email ?? "",
+            "email": FirebaseService.currentUser!.email ?? "",
             "age": age
         ]
         
@@ -170,7 +121,7 @@ class RegisterViewController: UIViewController {
         if let profileImageData = profileImageData {
             uploadProfilePicture(imageData: profileImageData)
         } else {
-            dbUsers.child(currentUser.uid).child("profile").setValue(currentUser.photoURL?.absoluteString)
+            FirebaseService.dbUsers.child(FirebaseService.currentUser!.uid).child("profile").setValue(FirebaseService.currentUser!.photoURL?.absoluteString)
         }
         
         goToMainPage()
@@ -188,3 +139,4 @@ class RegisterViewController: UIViewController {
     }
 
 }
+

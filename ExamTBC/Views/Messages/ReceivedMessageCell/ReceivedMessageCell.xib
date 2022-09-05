@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="KGk-i7-Jjw" customClass="ReceivedMessageCell" customModule="ExamTBC" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="313" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="313" height="70"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GYi-Xf-ghy">
+                        <rect key="frame" x="15" y="5" width="89" height="60"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Trf-pC-IQQ">
+                                <rect key="frame" x="10" y="10" width="69" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Trf-pC-IQQ" secondAttribute="trailing" constant="10" id="FLS-d5-E5D"/>
+                            <constraint firstItem="Trf-pC-IQQ" firstAttribute="top" secondItem="GYi-Xf-ghy" secondAttribute="top" constant="10" id="LAz-uK-SEa"/>
+                            <constraint firstAttribute="bottom" secondItem="Trf-pC-IQQ" secondAttribute="bottom" constant="10" id="TfR-0g-MuY"/>
+                            <constraint firstItem="Trf-pC-IQQ" firstAttribute="centerX" secondItem="GYi-Xf-ghy" secondAttribute="centerX" id="da6-UF-YWs"/>
+                            <constraint firstItem="Trf-pC-IQQ" firstAttribute="centerY" secondItem="GYi-Xf-ghy" secondAttribute="centerY" id="v4K-vR-0AF"/>
+                            <constraint firstItem="Trf-pC-IQQ" firstAttribute="leading" secondItem="GYi-Xf-ghy" secondAttribute="leading" constant="10" id="v5A-jf-a1c"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="GYi-Xf-ghy" secondAttribute="bottom" constant="5" id="JKB-3O-z7X"/>
+                    <constraint firstItem="GYi-Xf-ghy" firstAttribute="width" relation="lessThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.8" id="OY8-KU-Ebc"/>
+                    <constraint firstItem="GYi-Xf-ghy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="TqR-vY-j2g"/>
+                    <constraint firstItem="GYi-Xf-ghy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="rft-yk-6UQ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="labelMessage" destination="Trf-pC-IQQ" id="oLW-Db-I2M"/>
+                <outlet property="messageBackground" destination="GYi-Xf-ghy" id="6nc-fr-mI3"/>
+            </connections>
+            <point key="canvasLocation" x="132.60869565217394" y="112.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="tertiarySystemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

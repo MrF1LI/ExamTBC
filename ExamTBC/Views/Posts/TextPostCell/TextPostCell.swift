@@ -58,11 +58,9 @@ class TextPostCell: UITableViewCell {
     
     func configure(with post: TextPost) {
         
-        let dbUsers = Database.database().reference().child("users")
-        
         labelContent.text = post.content
         
-        dbUsers.child(post.author).observeSingleEvent(of: .value) { snapshot in
+        FirebaseService.dbUsers.child(post.author).observeSingleEvent(of: .value) { snapshot in
             let value = snapshot.value as? NSDictionary
             
             let name = value?["name"] as? String ?? ""
@@ -83,8 +81,8 @@ class TextPostCell: UITableViewCell {
                                               completed: nil)
         }
         
-        let ref = dbPosts.child(post.id).child("reacts")
-        ref.observeSingleEvent(of: .value) { snapshot in
+        let referenceOfReacts = FirebaseService.dbPosts.child(post.id).child("reacts")
+        referenceOfReacts.observeSingleEvent(of: .value) { snapshot in
             
             if snapshot.hasChild(Auth.auth().currentUser!.uid) {
                 self.imageViewHeart.image = UIImage(systemName: "heart.fill")

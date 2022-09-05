@@ -58,6 +58,7 @@ class AddMemeViewController: UIViewController {
     
     @objc func actionAdd() {
         guard let memeImageData = memeImageData else { return }
+        showSpinner()
         uploadMeme(imageData: memeImageData)
     }
     

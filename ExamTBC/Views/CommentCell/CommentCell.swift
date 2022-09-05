@@ -15,9 +15,7 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var labelContent: UILabel!
     
     @IBOutlet weak var viewCommentBackground: UIView!
-    
-    var dbUsers = Database.database().reference().child("users")
-    
+        
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -39,7 +37,7 @@ class CommentCell: UITableViewCell {
         
         labelContent.text = comment.content
         
-        dbUsers.child(comment.author).observe(.value) { snapshot in
+        FirebaseService.dbUsers.child(comment.author).observe(.value) { snapshot in
             
             let value = snapshot.value as? NSDictionary
             
@@ -50,9 +48,9 @@ class CommentCell: UITableViewCell {
             
             let url = value?["profile"] as? String ?? ""
             self.imageViewAuthorProfile.sd_setImage(with: URL(string: url),
-                                                                     placeholderImage: UIImage(named: "user"),
-                                                                     options: .continueInBackground,
-                                                                     completed: nil)
+                                                    placeholderImage: UIImage(named: "user"),
+                                                    options: .continueInBackground,
+                                                    completed: nil)
             
         }
         

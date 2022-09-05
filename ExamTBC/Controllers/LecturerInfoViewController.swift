@@ -18,6 +18,9 @@ class LecturerInfoViewController: UIViewController {
     @IBOutlet weak var labelLecturerFullName: UILabel!
     @IBOutlet weak var labelLecturerEmail: UILabel!
     
+    @IBOutlet weak var stackViewNameAndRecomend: UIStackView!
+    @IBOutlet weak var imageViewRecomendation: UIImageView!
+    
     @IBOutlet weak var labelLecturerRating: UILabel!
     @IBOutlet weak var lecturerRating: CosmosView!
     @IBOutlet weak var labelRatesCount: UILabel!
@@ -38,12 +41,8 @@ class LecturerInfoViewController: UIViewController {
     @IBOutlet weak var labelReviewsTitle: UILabel!
         
     // MARK: Variables
-    
-    static var db = Database.database().reference()
-    var dbLecturers = db.child("lecturers")
-    
+        
     var lecturer: Lecturer?
-    
     var arrayOfReviews = [Review]()
     
     var activeField: UITextField?
@@ -52,14 +51,13 @@ class LecturerInfoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
         configure()
         configureRatingView()
-        configureLecturerInfo()
+        loadLecturerInfo()
         configureTableViewReviews()
         loadReviews()
-        viewAddReviewBackground.bindToKeyboard()
+        listenToKeyboard()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -96,20 +94,16 @@ class LecturerInfoViewController: UIViewController {
     }
     
     func configureRatingView() {
-        
-        lecturerRating.didFinishTouchingCosmos = { rating in
-            guard let lecturer = self.lecturer else { return }
+        guard let lecturer = lecturer else { return }
 
-            let ratesRef = self.dbLecturers.child(lecturer.id).child("rates")
-            
-            ratesRef.child(Auth.auth().currentUser!.uid).setValue(Int(rating))
-            self.getLecturerRating()
-            
+        lecturerRating.didFinishTouchingCosmos = { rate in
+            FirebaseService.shared.rate(lecturer: lecturer, by: rate) {
+                self.getLecturerRating()
+            }
         }
-        
     }
     
-    func configureLecturerInfo() {
+    func loadLecturerInfo() {
         
         guard let lecturer = lecturer else { return }
 
@@ -118,15 +112,10 @@ class LecturerInfoViewController: UIViewController {
         
         getLecturerRating()
         
-        dbLecturers.child(lecturer.id).child("profile").observeSingleEvent(of: .value) { snapshot in
-            let url = snapshot.value as? String ?? ""
-            
-            self.imageViewLecturer.sd_setImage(with: URL(string: url),
-                                               placeholderImage: UIImage(named: "user"),
-                                               options: .continueInBackground,
-                                               completed: nil)
-            
-        }
+        self.imageViewLecturer.sd_setImage(with: URL(string: lecturer.profileImage),
+                                           placeholderImage: UIImage(named: "user"),
+                                           options: .continueInBackground,
+                                           completed: nil)
         
     }
     
@@ -139,31 +128,15 @@ class LecturerInfoViewController: UIViewController {
     }
     
     func loadReviews() {
-
-        dbLecturers.child(lecturer!.id).child("reviews").observe(.value) { [self] snapshot in
-
-            self.arrayOfReviews.removeAll()
-
-            for child in snapshot.children.allObjects as! [DataSnapshot] {
-
-                let data = child.value as? [String:AnyObject] ?? [:]
-                var currentReview = Review(id: data["id"] as? String ?? "",
-                                           author: data["author"] as? String ?? "",
-                                           text: data["review"] as? String ?? "",
-                                           date: data["date"] as? String ?? "")
-                
-                currentReview.lecturer = lecturer!.id
-
-                self.arrayOfReviews.append(currentReview)
-
-            }
-
-            labelReviewsTitle.isHidden = !(arrayOfReviews.count > 0)
-            self.tableViewReviews.reloadData()
-
-        }
-
+        
+        guard let lecturer = lecturer else { return }
         tableViewReviews.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
+        
+        FirebaseService.shared.fetchReviews(of: lecturer) { arrayOfReviews in
+            self.labelReviewsTitle.isHidden = !(arrayOfReviews.count > 0)
+            self.arrayOfReviews = arrayOfReviews
+            self.tableViewReviews.reloadData()
+        }
 
     }
     
@@ -172,33 +145,36 @@ class LecturerInfoViewController: UIViewController {
     @IBAction func actionAddReview(_ sender: UIButton) {
         
         guard let lecturer = lecturer else { return }
-        guard let review = textFieldReview.text, !review.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            return
+        guard let review = textFieldReview.text else { return }
+        
+        
+        FirebaseService.shared.review(lecturer: lecturer, with: review) {
+            self.textFieldReview.text = ""
         }
-        
-        let reviewsRef = dbLecturers.child(lecturer.id).child("reviews")
-        let reviewRef = reviewsRef.childByAutoId()
-                
-        let date = String(DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .none))
-        
-        let data = [
-            "id": reviewRef.key,
-            "author": Auth.auth().currentUser!.uid,
-            "date": date,
-            "review": review
-        ]
-        
-        reviewRef.setValue(data)
-        
-        textFieldReview.text = ""
         
     }
     
     // MARK: Functions
     
-    func configureRatingDesign(with rates: [String:Float]) {
+    func getLecturerRating() {
         
-        let arrayOfRates = rates.map { _, rate in rate }
+        guard let lecturer = lecturer else { return }
+
+        FirebaseService.shared.fetchRating(of: lecturer) { ratingData, arrayOfRates, rating in
+            self.labelLecturerRating.text = String(format: "%.1f", rating)
+            self.lecturerRating.rating = Double(rating)
+            self.configureRatingDesign(with: ratingData)
+            
+            self.labelRatesCount.text = "Based on \(arrayOfRates.count) rates"
+            self.imageViewRecomendation.isHidden = !(rating >= 4.8 && arrayOfRates.count > 5)
+            
+        }
+        
+    }
+    
+    func configureRatingDesign(with ratingData: [String:Float]) {
+        
+        let arrayOfRates = ratingData.map { _, rate in rate }
         
         let excellent = (arrayOfRates.filter { $0 == 5 }.count * 100) / arrayOfRates.count
         let good = (arrayOfRates.filter { $0 == 4 }.count * 100) / arrayOfRates.count
@@ -214,19 +190,41 @@ class LecturerInfoViewController: UIViewController {
                 
     }
     
-    func getLecturerRating() {
+    // MARK: Change Keyboard Constraints
+    
+    func listenToKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         
-        dbLecturers.child(lecturer!.id).child("rates").observeSingleEvent(of: .value) { snapshot in
-            let data = snapshot.value as? [String : Float] ?? [:]
-            
-            let rates = data.map { _, rate in rate }
-            let rating = Float(rates.reduce(0, +)) / Float(rates.count)
-
-            self.labelLecturerRating.text = String(format: "%.1f", rating)
-            self.lecturerRating.rating = Double(rating)
-            self.configureRatingDesign(with: data)
-            
-            self.labelRatesCount.text = "Based on \(rates.count) rates"
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        
+        let keyboardSize = (notification.userInfo?  [UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        
+        let keyboardHeight = keyboardSize?.height
+        
+        if #available(iOS 11.0, *){
+            self.addReviewBackgroundConstant.constant = keyboardHeight! - view.safeAreaInsets.bottom
+        }
+        else {
+            self.addReviewBackgroundConstant.constant = view.safeAreaInsets.bottom
+        }
+        
+        UIView.animate(withDuration: 0.5){
+            self.view.layoutIfNeeded()
+        }
+        
+        
+    }
+    
+    
+    @objc func keyboardWillHide(notification: Notification){
+        
+        self.addReviewBackgroundConstant.constant =  0 // or change according to your logic
+        
+        UIView.animate(withDuration: 0.5){
+            self.view.layoutIfNeeded()
         }
         
     }

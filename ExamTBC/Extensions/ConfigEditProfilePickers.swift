@@ -35,22 +35,22 @@ extension EditProfileViewController: UIImagePickerControllerDelegate, UINavigati
     
     func uploadProfilePicture(imageData: Data) {
         
-        let ref = "images/profile_images/\(currentUser.uid)/profile.png"
+        let ref = "images/profile_images/\(FirebaseService.currentUser!.uid)/profile.png"
         
-        storage.child(ref).putData(imageData, metadata: nil) { _, error in
+        FirebaseService.storage.child(ref).putData(imageData, metadata: nil) { _, error in
             guard error == nil else {
                 print("Failed to upload.")
                 return
             }
             
-            self.storage.child(ref).downloadURL { url, error in
+            FirebaseService.storage.child(ref).downloadURL { url, error in
                 guard let url = url, error == nil else {
                     return
                 }
                 
                 let urlString = url.absoluteString
                 
-                self.dbUsers.child(self.currentUser.uid).child("profile").setValue(urlString)
+                FirebaseService.dbUsers.child(FirebaseService.currentUser!.uid).child("profile").setValue(urlString)
                 
             }
         }

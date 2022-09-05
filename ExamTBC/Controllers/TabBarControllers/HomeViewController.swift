@@ -18,11 +18,7 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var tableViewPosts: UITableView!
     @IBOutlet weak var tableViewPostsHeight: NSLayoutConstraint!
-    
-    var currentUser = Auth.auth().currentUser!
-    var dbUsers = Database.database().reference().child("users")
-    var dbPosts = Database.database().reference().child("posts")
-    
+        
     var arrayOfPosts = [Post]()
     
     // MARK: - Lifecycle methods
@@ -63,17 +59,15 @@ class HomeViewController: UIViewController {
     func configureDesign() {
         backgroundAddPost.layer.cornerRadius = 35
         imageViewUserProfile.layer.cornerRadius = imageViewUserProfile.frame.width / 2
-        
     }
     
     func loadUserImage() {
         
-        dbUsers.child(currentUser.uid).observe(.value) { snapshot in
-            let value = snapshot.value as? NSDictionary
-            
-            let url = value?["profile"] as? String ?? ""
-
-            self.imageViewUserProfile.sd_setImage(with: URL(string: url),
+        let referenceOfCurrentUser = FirebaseService.dbUsers.child(FirebaseService.currentUser!.uid)
+        
+        referenceOfCurrentUser.observe(.value) { snapshot in
+            let user = User(with: snapshot)
+            self.imageViewUserProfile.sd_setImage(with: URL(string: user.profilePicture ?? ""),
                                                placeholderImage: UIImage(named: "user"),
                                                options: .continueInBackground,
                                                completed: nil)
@@ -95,7 +89,7 @@ class HomeViewController: UIViewController {
         
         tableViewPosts.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
         
-        dbPosts.observe(.value) { snapshot in
+        FirebaseService.dbPosts.observeSingleEvent(of: .value) { snapshot in
             
             self.arrayOfPosts.removeAll()
             
@@ -117,17 +111,20 @@ class HomeViewController: UIViewController {
                 //
                 
                 if type == "text" {
-                    
-                    let post = TextPost(id: data["id"] as? String ?? "",
-                                        author: data["author"] as? String ?? "",
-                                        content: data["content"] as? String ?? "", date: dateObj)
+                    let post = TextPost(with: child)
                     self.arrayOfPosts.append(post)
                     
                 } else if type == "image" {
                     
+                    var arrayOfImages = [String]()
+                    
+                    let images = data["images"] as? [String:String] ?? [:]
+                    arrayOfImages = images.map { $1 }
+                                        
                     var post = ImagePost(id: data["id"] as? String ?? "",
                                          author: data["author"] as? String ?? "",
-                                         imageUrl: data["image"] as? String ?? "", date: dateObj)
+                                         images: arrayOfImages,
+                                         date: dateObj)
                     
                     if let content = data["content"] as? String {
                         post.text = content

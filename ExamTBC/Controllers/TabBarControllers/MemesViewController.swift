@@ -14,8 +14,6 @@ class MemesViewController: UIViewController {
     
     @IBOutlet weak var collectionViewMemes: UICollectionView!
     
-    var dbMemes = Database.database().reference().child("memes")
-    
     var arrayOfMemes = [Meme]()
     
     var scale = 3
@@ -56,25 +54,27 @@ class MemesViewController: UIViewController {
     }
     
     func loadMemes() {
-        
-        dbMemes.observe(.value) { [self] snapshot in
-            
-            self.arrayOfMemes.removeAll()
-            
-            for child in snapshot.children.allObjects as! [DataSnapshot] {
                 
-                let data = child.value as? [String:AnyObject] ?? [:]
-                
-                let currentMeme = Meme(author: data["author"] as? String ?? "",
-                                       imageUrl: data["url"] as? String ?? "")
-                
-                arrayOfMemes.append(currentMeme)
-                
-            }
-            
+        FirebaseService.shared.fetchMemes { arrayOfMemes in
+            self.arrayOfMemes = arrayOfMemes
             self.collectionViewMemes.reloadData()
-            
         }
+        
+        
+//        dbMemes.observe(.value) { [self] snapshot in
+//
+//            self.arrayOfMemes.removeAll()
+//
+//            for child in snapshot.children.allObjects as! [DataSnapshot] {
+//
+//                let currentMeme = Meme(with: child)
+//                arrayOfMemes.append(currentMeme)
+//
+//            }
+//
+//            self.collectionViewMemes.reloadData()
+//
+//        }
         
     }
     

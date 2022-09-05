@@ -16,16 +16,10 @@ class AddPostViewController: UIViewController {
     
     @IBOutlet weak var textViewPost: UITextView!
     @IBOutlet weak var imageViewAddImage: UIImageView!
-    
-    let currentUser = Auth.auth().currentUser!
-    static let db = Database.database().reference()
-    let dbUsers = db.child("users")
-    let dbPosts = db.child("posts")
-    let dbMemes = db.child("memes")
-    
-    var storage = Storage.storage().reference()
-    
-    var imageData: Data?
+    @IBOutlet weak var collectionViewImages: UICollectionView!
+        
+    var imageData: [Data?] = []
+    var arrayOfImages = [UIImage]()
     
     // MARK: Lifecycle methods
 
@@ -34,6 +28,7 @@ class AddPostViewController: UIViewController {
         // Do any additional setup after loading the view.
         configureNavigationItem()
         configureGestures()
+        configureCollectionView()
     }
     
     func configureNavigationItem() {
@@ -53,6 +48,12 @@ class AddPostViewController: UIViewController {
         imageViewAddImage.addGestureRecognizer(gesture)
     }
     
+    func configureCollectionView() {
+        collectionViewImages.delegate = self
+        collectionViewImages.dataSource = self
+        collectionViewImages.register(UINib(nibName: "ImageCell", bundle: nil), forCellWithReuseIdentifier: "ImageCell")
+    }
+    
     // MARK: Actions
     
     @objc func actionCancel() {
@@ -64,30 +65,42 @@ class AddPostViewController: UIViewController {
     }
     
     @objc func actionPost() {
+        
+        showSpinner()
+        
         guard let content = textViewPost.text, !content.trimmingCharacters(in: .whitespaces).isEmpty else {
             return
         }
         
-        let postRef = dbPosts.childByAutoId()
+        let postRef = FirebaseService.dbPosts.childByAutoId()
         
         let date = String(DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .medium))
         
         let data = [
             "id": postRef.key,
-            "author": currentUser.uid,
+            "author": FirebaseService.currentUser!.uid,
             "content": content,
-            "type": imageData == nil ? "text" : "image",
+            "type": imageData.count < 1 ? "text" : "image",
             "date": date
         ]
         
         postRef.setValue(data) { error, databaseReference in
+    
+            var arrayOfImageData = [Data]()
             
-            if let imageData = self.imageData {
-                self.uploadPostImage(imageData: imageData, reference: postRef)
+            for each in self.imageData {
+                if let currentImageData = each {
+                    arrayOfImageData.append(currentImageData)
+                }
             }
             
-            NotificationCenter.default.post(name: Notification.Name("postPublished"), object: nil)
-            self.dismiss(animated: true)
+            if arrayOfImageData.count > 0 {
+                self.uploadPostImages(arrayOfImageData: arrayOfImageData, reference: postRef)
+            } else {
+                NotificationCenter.default.post(name: Notification.Name("postPublished"), object: nil)
+                self.dismiss(animated: true)
+            }
+            
         }
     }
     
@@ -102,3 +115,4 @@ class AddPostViewController: UIViewController {
     }
 
 }
+

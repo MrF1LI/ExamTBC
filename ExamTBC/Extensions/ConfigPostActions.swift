@@ -17,9 +17,11 @@ extension HomeViewController: PostCellDelegate {
         if let indexPath = tableViewPosts.indexPath(for: cell) {
 
             let post = arrayOfPosts[indexPath.row]
-            let reactRef = dbPosts.child(post.id).child("reacts")
             
-            reactRef.child(currentUser.uid).observeSingleEvent(of: .value) { snapshot in
+            let referenceOfReacts = FirebaseService.dbPosts.child(post.id).child("reacts")
+            let currentUserReacts = referenceOfReacts.child(FirebaseService.currentUser!.uid)
+            
+            currentUserReacts.observeSingleEvent(of: .value) { snapshot in
                 
                 if snapshot.exists() {
                 
@@ -72,7 +74,7 @@ extension HomeViewController: PostCellDelegate {
                     }
                     
                     let date = String(DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .none))
-                    reactRef.updateChildValues([self.currentUser.uid: date])
+                    referenceOfReacts.updateChildValues([FirebaseService.currentUser!.uid: date])
                     
                 }
                 
@@ -108,7 +110,7 @@ extension HomeViewController: PostCellDelegate {
     // MARK: Navigation Functions
     
     func showComments(postId: String) {
-        let commentsVC = self.storyboard?.instantiateViewController(withIdentifier: "CommentsViewController") as?
+        let commentsVC = self.storyboard?.instantiateViewController(withIdentifier: "CommentsarViewController") as?
         CommentsViewController
         guard let commentsVC = commentsVC else { return }
 

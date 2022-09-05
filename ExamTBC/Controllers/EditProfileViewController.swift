@@ -24,12 +24,7 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var textFieldMinor: UITextField!
     
     // MARK: Variables
-    
-    var currentUser = Auth.auth().currentUser!
-    var dbUsers = Database.database().reference().child("users")
-    
-    var storage = Storage.storage().reference()
-    
+        
     var datePicker = UIDatePicker()
     var coursePicker = UIPickerView()
     var facultyPicker = UIPickerView()
@@ -59,21 +54,9 @@ class EditProfileViewController: UIViewController {
     func configureForm() {
         imageViewProfile.layer.cornerRadius = imageViewProfile.frame.width / 2
         
-        dbUsers.child(currentUser.uid).observeSingleEvent(of: .value) { snapshot in
+        FirebaseService.dbUsers.child(FirebaseService.currentUser!.uid).observeSingleEvent(of: .value) { snapshot in
             
-            let user = snapshot.getValueAsUser()
-            
-//            let value = snapshot.value as? NSDictionary
-//            let user = User(id: value?["id"] as? String ?? "",
-//                            name: value?["name"] as? String ?? "",
-//                            surname: value?["surname"] as? String ?? "",
-//                            age: value?["age"] as? Int ?? 0,
-//                            email: value?["email"] as? String ?? "")
-//
-//            let faculty = value?["faculty"] as? String ?? ""
-//            let course = value?["course"] as? String ?? ""
-//            let dateAsString = value?["date"] as? String ?? ""
-//            let minor = value?["minor"] as? String ?? ""
+            let user = User(with: snapshot)
             
             // String to date
             
@@ -111,21 +94,6 @@ class EditProfileViewController: UIViewController {
                                               placeholderImage: UIImage(named: "user"),
                                               options: .continueInBackground,
                                               completed: nil)
-
-//            let url = user.profilePicture
-//            if let imageUrlString = url {
-//
-//                self.imageViewProfile.sd_setImage(with: URL(string: imageUrlString),
-//                                             placeholderImage: UIImage(named: "user"),
-//                                             options: .continueInBackground,
-//                                             completed: nil)
-//
-//            } else {
-//                self.imageViewProfile.sd_setImage(with: URL(string: self.currentUser.photoURL!.absoluteString),
-//                                             placeholderImage: UIImage(named: "user"),
-//                                             options: .continueInBackground,
-//                                             completed: nil)
-//            }
             
             //
             
@@ -226,18 +194,18 @@ class EditProfileViewController: UIViewController {
     
     func saveUserInfo(name: String, surname: String, date: String, course: String, faculty: String) {
         
-        let userRef = dbUsers.child(currentUser.uid)
+        let userRef = FirebaseService.dbUsers.child(FirebaseService.currentUser!.uid)
         
         let age = datePicker.date.getAge()
         
         var userInfo: [String : Any] = [
-            "id": currentUser.uid,
+            "id": FirebaseService.currentUser!.uid,
             "name": name,
             "surname": surname,
             "date": date,
             "course": course,
             "faculty": faculty,
-            "email": currentUser.email ?? "",
+            "email": FirebaseService.currentUser!.email ?? "",
             "age": age
         ]
         
